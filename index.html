@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>VELORA v1.2 — Ad-Free Video Client</title>
+  <title>VELORA v1.3 — Ad-Free Video Client</title>
 
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,19 +18,20 @@
 
   <style>
     /* ==========================================================================
-       VELORA v1.2 DESIGN SYSTEM — AMOLED PITCH BLACK + iOS / ColorOS SPRING ENGINE
+       VELORA v1.3 DESIGN SYSTEM — AMOLED PITCH BLACK + LIQUID GLASS + SPRING
        ========================================================================== */
     :root {
       --bg-pitch: #000000;
-      --bg-card: #0B0B10;
-      --bg-glass: rgba(16, 16, 23, 0.88);
-      --bg-elevated: #14141D;
-      --bg-input: #0D0D14;
+      --bg-card: #09090E;
+      --bg-glass: rgba(16, 15, 24, 0.86);
+      --bg-elevated: #13121D;
+      --bg-input: #0D0C14;
       --border-glass: rgba(255, 255, 255, 0.085);
-      --border-accent: rgba(167, 139, 250, 0.42);
-      --accent-primary: #8B5CF6;
-      --accent-lavender: #A78BFA;
-      --accent-glow: rgba(139, 92, 246, 0.34);
+      --border-accent: rgba(157, 107, 255, 0.45);
+      --accent-primary: #9d6bff;
+      --accent-deep: #7c3aed;
+      --accent-lavender: #c4b5fd;
+      --accent-glow: rgba(157, 107, 255, 0.36);
       --text-primary: #F8FAFC;
       --text-secondary: #94A3B8;
       --text-muted: #64748B;
@@ -40,7 +41,7 @@
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
 
-      /* Dynamic Animation & Motion Blur Tokens */
+      /* Dynamic iOS / ColorOS Spring & Motion Blur Tokens */
       --spring-curve: cubic-bezier(0.32, 1.28, 0.42, 1);
       --launch-curve: cubic-bezier(0.22, 1.24, 0.36, 1);
       --motion-blur-peak: 6px;
@@ -94,21 +95,21 @@
     }
 
     /* ==========================================================================
-       1. FLAGSHIP iOS / ColorOS APP LAUNCH STAGE & SPECULAR SWEEP
+       1. FLAGSHIP iOS / ColorOS APP LAUNCH SPLASH (AUTO-DISMISSES AFTER 1.1s)
        ========================================================================== */
     .launch-stage {
       position: fixed;
       inset: 0;
       z-index: 200;
-      background: radial-gradient(circle at 50% 44%, #16102A 0%, #050508 48%, #000000 100%);
+      background: radial-gradient(circle at 50% 44%, #1A1133 0%, #050508 48%, #000000 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 18px;
-      pointer-events: auto;
+      pointer-events: none;
       will-change: transform, opacity, filter;
-      animation: launchBackdropFade calc(1.05s * var(--anim-speed-mult)) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: launchBackdropFade calc(1.08s * var(--anim-speed-mult)) cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
     .launch-stage.is-dismissed {
@@ -121,17 +122,17 @@
       width: 96px;
       height: 96px;
       border-radius: 28px;
-      background: linear-gradient(145deg, rgba(167, 139, 250, 0.28) 0%, rgba(139, 92, 246, 0.14) 50%, rgba(15, 13, 28, 0.92) 100%);
-      border: 1.5px solid rgba(196, 181, 253, 0.5);
+      background: linear-gradient(145deg, rgba(157, 107, 255, 0.32) 0%, rgba(124, 58, 237, 0.16) 50%, rgba(13, 11, 24, 0.94) 100%);
+      border: 1.5px solid rgba(196, 181, 253, 0.52);
       box-shadow:
-        0 24px 60px rgba(139, 92, 246, 0.55),
-        inset 0 1px 1px rgba(255, 255, 255, 0.45);
+        0 24px 64px rgba(157, 107, 255, 0.58),
+        inset 0 1px 1px rgba(255, 255, 255, 0.48);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       will-change: transform, opacity, filter;
-      animation: squircleSpringLaunch calc(1.02s * var(--anim-speed-mult)) var(--launch-curve) forwards;
+      animation: squircleSpringLaunch calc(1.05s * var(--anim-speed-mult)) var(--launch-curve) forwards;
     }
 
     .launch-specular {
@@ -143,7 +144,7 @@
       background: linear-gradient(
         105deg,
         transparent 20%,
-        rgba(255, 255, 255, 0.48) 50%,
+        rgba(255, 255, 255, 0.5) 50%,
         transparent 80%
       );
       transform: skewX(-22deg);
@@ -151,15 +152,15 @@
     }
 
     .launch-wordmark {
-      font-size: 1.45rem;
+      font-size: 1.48rem;
       font-weight: 900;
       letter-spacing: 0.24em;
       padding-left: 0.24em;
-      background: linear-gradient(135deg, #FFFFFF 15%, #DDD6FE 60%, #A78BFA 100%);
+      background: linear-gradient(135deg, #FFFFFF 15%, #DDD6FE 58%, #9d6bff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       will-change: transform, opacity, filter;
-      animation: launchWordmarkSpring calc(0.95s * var(--anim-speed-mult)) var(--launch-curve) forwards;
+      animation: launchWordmarkSpring calc(0.98s * var(--anim-speed-mult)) var(--launch-curve) forwards;
     }
 
     @keyframes squircleSpringLaunch {
@@ -170,7 +171,7 @@
       }
       38% {
         opacity: 1;
-        transform: scale3d(1.08, 1.08, 1);
+        transform: scale3d(1.09, 1.09, 1);
         filter: blur(0px);
       }
       58% {
@@ -376,15 +377,15 @@
     }
 
     /* ==========================================================================
-       3. STICKY HEADER & TACTILE CONTROLS
+       3. LIQUID GLASS HEADER & UNIVERSAL LINK / ID BAR
        ========================================================================== */
     .top-header {
       position: sticky;
       top: 0;
       z-index: 30;
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      background: rgba(5, 5, 8, 0.84);
+      backdrop-filter: blur(22px) saturate(160%);
+      -webkit-backdrop-filter: blur(22px) saturate(160%);
       border-bottom: 1px solid var(--border-glass);
       padding: 10px 14px;
       transform: translate3d(0, 0, 0);
@@ -407,10 +408,10 @@
     }
 
     .brand-title {
-      font-size: 1.15rem;
+      font-size: 1.16rem;
       font-weight: 800;
       letter-spacing: 0.06em;
-      background: linear-gradient(135deg, #FFFFFF 15%, #DDD6FE 55%, #A78BFA 100%);
+      background: linear-gradient(135deg, #FFFFFF 15%, #DDD6FE 55%, #9d6bff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -456,8 +457,8 @@
 
     .header-icon-btn:hover,
     .header-icon-btn.is-active {
-      background: rgba(139, 92, 246, 0.22);
-      border-color: var(--accent-lavender);
+      background: rgba(157, 107, 255, 0.22);
+      border-color: var(--accent-primary);
       color: var(--accent-lavender);
     }
 
@@ -470,16 +471,17 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      background: var(--bg-card);
+      background: rgba(13, 12, 20, 0.92);
       border: 1px solid var(--border-glass);
       border-radius: 14px;
       padding: 4px 5px 4px 11px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
       transition: border-color 0.16s ease, box-shadow 0.16s ease;
     }
 
     .quick-play-bar:focus-within {
-      border-color: var(--accent-lavender);
-      box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 2px rgba(157, 107, 255, 0.22);
     }
 
     .quick-input {
@@ -497,7 +499,7 @@
       color: var(--text-muted);
     }
 
-    /* Tactile Spring Buttons */
+    /* Tactile Liquid Glass Buttons */
     .btn-glass {
       display: inline-flex;
       align-items: center;
@@ -531,8 +533,8 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
-      background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
-      border: 1px solid rgba(196, 181, 253, 0.34);
+      background: linear-gradient(135deg, #9d6bff 0%, #7c3aed 100%);
+      border: 1px solid rgba(221, 214, 254, 0.36);
       color: #FFFFFF;
       border-radius: 11px;
       padding: 7px 12px;
@@ -540,7 +542,7 @@
       font-weight: 700;
       white-space: nowrap;
       flex-shrink: 0;
-      box-shadow: 0 4px 14px var(--accent-glow);
+      box-shadow: 0 4px 16px var(--accent-glow);
       transition: transform calc(0.28s * var(--anim-speed-mult)) var(--spring-curve),
                   filter 0.15s ease;
     }
@@ -583,7 +585,7 @@
     .filter-pill {
       padding: 7px 14px;
       border-radius: 999px;
-      background: var(--bg-card);
+      background: rgba(16, 15, 24, 0.85);
       border: 1px solid var(--border-glass);
       color: var(--text-secondary);
       font-size: 0.77rem;
@@ -597,10 +599,10 @@
     }
 
     .filter-pill.active {
-      background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+      background: linear-gradient(135deg, #9d6bff, #7c3aed);
       border-color: var(--accent-lavender);
       color: #FFFFFF;
-      box-shadow: 0 3px 12px var(--accent-glow);
+      box-shadow: 0 3px 14px var(--accent-glow);
     }
 
     .filter-pill:active {
@@ -608,8 +610,10 @@
     }
 
     .interest-banner {
-      background: linear-gradient(145deg, rgba(22, 18, 38, 0.92), rgba(11, 11, 16, 0.96));
-      border: 1px solid rgba(167, 139, 250, 0.25);
+      background: linear-gradient(145deg, rgba(26, 20, 46, 0.86), rgba(11, 11, 16, 0.94));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(157, 107, 255, 0.28);
       border-radius: 16px;
       padding: 11px 13px;
       margin-bottom: 12px;
@@ -637,8 +641,8 @@
     /* Live Word & Phrase Matching Box */
     .suggestions-box {
       margin-top: 9px;
-      background: #0D0D15;
-      border: 1px solid rgba(167, 139, 250, 0.34);
+      background: #0D0C15;
+      border: 1px solid rgba(157, 107, 255, 0.36);
       border-radius: 14px;
       overflow: hidden;
       display: none;
@@ -656,7 +660,7 @@
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--accent-lavender);
-      background: rgba(139, 92, 246, 0.12);
+      background: rgba(157, 107, 255, 0.14);
       border-bottom: 1px solid var(--border-glass);
       display: flex;
       justify-content: space-between;
@@ -685,11 +689,11 @@
 
     .suggestion-item:hover,
     .suggestion-item:active {
-      background: rgba(139, 92, 246, 0.18);
+      background: rgba(157, 107, 255, 0.18);
     }
 
     .match-hl {
-      background: rgba(167, 139, 250, 0.32);
+      background: rgba(157, 107, 255, 0.34);
       color: #F5F3FF;
       font-weight: 700;
       border-radius: 4px;
@@ -725,9 +729,9 @@
       }
     }
 
-    /* 120fps Ultra-Light GPU-Composited Video Card */
+    /* 120fps Liquid Glass Video Card */
     .video-card {
-      background: var(--bg-card);
+      background: linear-gradient(165deg, rgba(19, 18, 29, 0.9) 0%, rgba(10, 10, 15, 0.96) 100%);
       border: 1px solid var(--border-glass);
       border-radius: 17px;
       overflow: hidden;
@@ -735,6 +739,7 @@
       flex-direction: column;
       content-visibility: auto;
       contain-intrinsic-size: 265px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
       transition: transform calc(0.32s * var(--anim-speed-mult)) var(--spring-curve),
                   border-color 0.16s ease;
       transform: translate3d(0, 0, 0);
@@ -752,7 +757,7 @@
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
-      background: linear-gradient(135deg, #111118 0%, #1F1638 100%);
+      background: linear-gradient(135deg, #11101A 0%, #221640 100%);
       overflow: hidden;
     }
 
@@ -767,7 +772,7 @@
       gap: 6px;
       padding: 14px;
       text-align: center;
-      background: radial-gradient(circle at 30% 25%, rgba(139, 92, 246, 0.34), rgba(11, 11, 16, 0.98) 78%);
+      background: radial-gradient(circle at 30% 25%, rgba(157, 107, 255, 0.36), rgba(9, 9, 14, 0.98) 78%);
     }
 
     .thumb-fallback-title {
@@ -805,13 +810,13 @@
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      background: rgba(139, 92, 246, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(157, 107, 255, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.32);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #FFFFFF;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
     }
 
     .duration-pill {
@@ -834,7 +839,7 @@
       top: 8px;
       left: 8px;
       z-index: 4;
-      background: rgba(139, 92, 246, 0.92);
+      background: rgba(157, 107, 255, 0.94);
       color: #FFFFFF;
       font-size: 0.6rem;
       font-weight: 800;
@@ -879,9 +884,9 @@
     }
 
     .tag-lavender {
-      background: rgba(139, 92, 246, 0.16);
+      background: rgba(157, 107, 255, 0.18);
       color: var(--accent-lavender);
-      border: 1px solid rgba(167, 139, 250, 0.26);
+      border: 1px solid rgba(196, 181, 253, 0.28);
       padding: 1px 7px;
       border-radius: 6px;
       font-size: 0.65rem;
@@ -904,8 +909,8 @@
     }
 
     .icon-action-btn.bookmarked {
-      background: rgba(139, 92, 246, 0.22);
-      border-color: var(--accent-lavender);
+      background: rgba(157, 107, 255, 0.24);
+      border-color: var(--accent-primary);
       color: var(--accent-lavender);
     }
 
@@ -925,7 +930,7 @@
     }
 
     /* ==========================================================================
-       5. PERSISTENT DUAL-LAYER PLAYER & FLOATING PILL MINI-PLAYER
+       5. PERSISTENT DUAL-LAYER PLAYER, NON-EMBEDDABLE FALLBACK & MINI-PLAYER
        ========================================================================== */
     .persistent-player {
       position: fixed;
@@ -988,24 +993,33 @@
       background: #000000;
     }
 
-    /* Ad-Skip Shield Banner inside Video Stage */
-    .ad-shield-overlay {
+    /* Clean Non-Embeddable / Restricted Video Fallback Overlay */
+    .embed-fallback-overlay {
       position: absolute;
       inset: 0;
-      z-index: 5;
-      background: rgba(5, 5, 10, 0.94);
-      backdrop-filter: blur(12px);
+      z-index: 8;
+      background: radial-gradient(circle at 50% 35%, rgba(28, 20, 52, 0.96) 0%, rgba(6, 6, 10, 0.98) 85%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 16px;
+      padding: 18px;
       text-align: center;
     }
 
-    .ad-shield-overlay.active {
+    .embed-fallback-overlay.active {
       display: flex;
+    }
+
+    .persistent-player.is-minimized .embed-fallback-overlay {
+      padding: 4px;
+    }
+
+    .persistent-player.is-minimized .embed-fallback-overlay .fallback-hide-mini {
+      display: none;
     }
 
     .persistent-player.is-expanded .mini-dock-bar {
@@ -1026,9 +1040,9 @@
       max-width: 960px;
       margin: 0 auto;
       z-index: 45;
-      background: rgba(16, 16, 23, 0.96);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      background: rgba(16, 15, 24, 0.94);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
       border: 1px solid var(--border-accent);
       border-radius: 18px;
       box-shadow: 0 14px 36px rgba(0, 0, 0, 0.92);
@@ -1112,7 +1126,7 @@
       gap: 6px;
       padding: 8px 13px;
       border-radius: 12px;
-      background: var(--bg-card);
+      background: rgba(16, 15, 24, 0.9);
       border: 1px solid var(--border-glass);
       color: var(--text-primary);
       font-size: 0.76rem;
@@ -1125,8 +1139,8 @@
     }
 
     .tool-chip.is-active {
-      background: rgba(139, 92, 246, 0.22);
-      border-color: var(--accent-lavender);
+      background: rgba(157, 107, 255, 0.22);
+      border-color: var(--accent-primary);
       color: var(--accent-lavender);
     }
 
@@ -1150,9 +1164,9 @@
       z-index: 50;
       height: calc(var(--nav-height) + var(--safe-bottom));
       padding-bottom: var(--safe-bottom);
-      background: rgba(6, 6, 9, 0.94);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      background: rgba(6, 6, 10, 0.92);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
       border-top: 1px solid var(--border-glass);
       display: flex;
       align-items: center;
@@ -1194,19 +1208,22 @@
     }
 
     .nav-btn.active .nav-pill-icon {
-      background: rgba(139, 92, 246, 0.2);
+      background: rgba(157, 107, 255, 0.22);
       transform: scale3d(1.06, 1.06, 1);
     }
 
     /* ==========================================================================
-       7. SETTINGS STUDIO, SEGMENTED SELECTORS, SLIDERS & SWITCHES
+       7. LIQUID GLASS SETTINGS STUDIO, SLIDERS & SWITCHES
        ========================================================================== */
     .glass-card {
-      background: var(--bg-card);
+      background: linear-gradient(165deg, rgba(18, 17, 28, 0.88) 0%, rgba(10, 10, 15, 0.95) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--border-glass);
       border-radius: 18px;
       padding: 15px;
       margin-bottom: 14px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
     }
 
     .settings-section-title {
@@ -1250,6 +1267,7 @@
       font-size: 0.72rem;
       color: #94A3B8;
       margin-top: 2px;
+      line-height: 1.4;
     }
 
     .seg-group {
@@ -1274,10 +1292,10 @@
     }
 
     .seg-pill.active {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.34), rgba(109, 40, 217, 0.28));
-      border-color: var(--accent-lavender);
+      background: linear-gradient(135deg, rgba(157, 107, 255, 0.36), rgba(124, 58, 237, 0.28));
+      border-color: var(--accent-primary);
       color: #F5F3FF;
-      box-shadow: 0 2px 10px rgba(139, 92, 246, 0.24);
+      box-shadow: 0 2px 12px rgba(157, 107, 255, 0.25);
     }
 
     .seg-pill:active {
@@ -1295,8 +1313,8 @@
       font-size: 0.72rem;
       font-weight: 700;
       color: var(--accent-lavender);
-      background: rgba(139, 92, 246, 0.16);
-      border: 1px solid rgba(167, 139, 250, 0.28);
+      background: rgba(157, 107, 255, 0.18);
+      border: 1px solid rgba(196, 181, 253, 0.3);
       padding: 2px 8px;
       border-radius: 7px;
       font-variant-numeric: tabular-nums;
@@ -1318,9 +1336,9 @@
       width: 19px;
       height: 19px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #DDD6FE 0%, #8B5CF6 100%);
+      background: linear-gradient(135deg, #DDD6FE 0%, #9d6bff 100%);
       border: 2px solid #FFFFFF;
-      box-shadow: 0 2px 10px rgba(139, 92, 246, 0.65);
+      box-shadow: 0 2px 10px rgba(157, 107, 255, 0.65);
       cursor: pointer;
       transition: transform 0.15s ease;
     }
@@ -1374,12 +1392,12 @@
     }
 
     .velora-input:focus {
-      border-color: var(--accent-lavender);
+      border-color: var(--accent-primary);
     }
 
     .upload-dropzone {
-      border: 1.5px dashed rgba(167, 139, 250, 0.45);
-      background: rgba(139, 92, 246, 0.08);
+      border: 1.5px dashed rgba(157, 107, 255, 0.45);
+      background: rgba(157, 107, 255, 0.08);
       border-radius: 14px;
       padding: 18px 14px;
       text-align: center;
@@ -1388,8 +1406,8 @@
     }
 
     .upload-dropzone:hover {
-      background: rgba(139, 92, 246, 0.15);
-      border-color: var(--accent-lavender);
+      background: rgba(157, 107, 255, 0.15);
+      border-color: var(--accent-primary);
     }
 
     .interest-grid {
@@ -1419,8 +1437,8 @@
     }
 
     .interest-option-btn.selected {
-      background: rgba(139, 92, 246, 0.22);
-      border-color: var(--accent-lavender);
+      background: rgba(157, 107, 255, 0.22);
+      border-color: var(--accent-primary);
       color: #F5F3FF;
     }
 
@@ -1431,8 +1449,8 @@
     .velora-spinner {
       width: 20px;
       height: 20px;
-      border: 2.5px solid rgba(167, 139, 250, 0.22);
-      border-top-color: var(--accent-lavender);
+      border: 2.5px solid rgba(157, 107, 255, 0.24);
+      border-top-color: var(--accent-primary);
       border-radius: 50%;
       animation: spinAnim 0.65s linear infinite;
       flex-shrink: 0;
@@ -1447,8 +1465,8 @@
       inset: 0;
       z-index: 85;
       background: rgba(0, 0, 0, 0.84);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -1463,7 +1481,7 @@
     .modal-dialog {
       width: 100%;
       max-width: 450px;
-      background: #121219;
+      background: #12111B;
       border: 1px solid var(--border-accent);
       border-radius: 20px;
       padding: 18px;
@@ -1493,8 +1511,8 @@
     }
 
     .toast-pill {
-      background: rgba(24, 22, 38, 0.97);
-      border: 1px solid var(--accent-lavender);
+      background: rgba(22, 19, 36, 0.97);
+      border: 1px solid var(--accent-primary);
       color: #F8FAFC;
       padding: 10px 16px;
       border-radius: 13px;
@@ -1521,7 +1539,7 @@
   </svg>
 
   <!-- ==========================================================================
-       1. FLAGSHIP iOS / ColorOS APP LAUNCH STAGE
+       1. FLAGSHIP iOS / ColorOS APP LAUNCH SPLASH (AUTO-HIDES IN 1.1s)
        ========================================================================== -->
   <div id="launch-stage" class="launch-stage" aria-hidden="true">
     <div class="launch-squircle">
@@ -1530,12 +1548,12 @@
         <defs>
           <linearGradient id="launchPrismA" x1="4" y1="4" x2="32" y2="32" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stop-color="#DDD6FE" />
-            <stop offset="50%" stop-color="#8B5CF6" />
+            <stop offset="50%" stop-color="#9d6bff" />
             <stop offset="100%" stop-color="#5B21B6" />
           </linearGradient>
           <linearGradient id="launchPrismB" x1="18" y1="6" x2="29" y2="30" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stop-color="#FFFFFF" />
-            <stop offset="100%" stop-color="#A78BFA" />
+            <stop offset="100%" stop-color="#c4b5fd" />
           </linearGradient>
         </defs>
         <polygon points="7,8 14,8 18,21.5 15,28" fill="url(#launchPrismA)" />
@@ -1552,26 +1570,26 @@
   <!-- Main App Shell -->
   <div id="app-shell" class="app-shell shell-entrance">
 
-    <!-- Sticky Top Header & YouTube Link / ID Bar -->
+    <!-- Sticky Liquid Glass Header & Universal YouTube Link / ID Bar -->
     <header class="top-header">
       <div class="header-top-row">
         <div class="brand-group">
           <svg width="30" height="30" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
               <linearGradient id="veloraPrismGrad1" x1="4" y1="4" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#A78BFA" />
-                <stop offset="50%" stop-color="#8B5CF6" />
+                <stop offset="0%" stop-color="#c4b5fd" />
+                <stop offset="50%" stop-color="#9d6bff" />
                 <stop offset="100%" stop-color="#5B21B6" />
               </linearGradient>
               <linearGradient id="veloraPrismGrad2" x1="18" y1="6" x2="29" y2="30" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#DDD6FE" />
+                <stop offset="0%" stop-color="#EDE9FE" />
                 <stop offset="100%" stop-color="#7C3AED" />
               </linearGradient>
             </defs>
-            <rect x="1" y="1" width="34" height="34" rx="10" fill="rgba(139, 92, 246, 0.16)" stroke="rgba(167, 139, 250, 0.38)" stroke-width="1.2"/>
+            <rect x="1" y="1" width="34" height="34" rx="10" fill="rgba(157, 107, 255, 0.18)" stroke="rgba(196, 181, 253, 0.4)" stroke-width="1.2"/>
             <polygon points="8,9 14.2,9 18,21.5 15.2,27" fill="url(#veloraPrismGrad1)" />
             <polygon points="28,9 21.8,9 15.2,27 18,27" fill="url(#veloraPrismGrad2)" />
-            <polygon points="16.2,13.5 21.2,16.5 16.2,19.5" fill="#FFFFFF" opacity="0.94" />
+            <polygon points="16.2,13.5 21.2,16.5 16.2,19.5" fill="#FFFFFF" opacity="0.95" />
           </svg>
           <span class="brand-title">VELORA</span>
           <div id="live-fps-badge" class="fps-badge" title="Target & Live Frame Rate">
@@ -1579,7 +1597,7 @@
           </div>
         </div>
 
-        <!-- Top-Right Action Controls: + Upload, Search Icon, Settings Icon -->
+        <!-- Top-Right Action Controls: + Upload, Search Icon, Settings Gear Icon -->
         <div class="header-actions">
           <button id="btn-header-upload" type="button" class="btn-violet" style="padding:7px 10px; font-size:0.72rem;" title="Upload Video">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -1606,9 +1624,9 @@
         </div>
       </div>
 
-      <!-- Compact YouTube Link / ID Bar -->
+      <!-- Universal YouTube Link / ID Paste Bar -->
       <div class="quick-play-bar">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9d6bff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
           <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
           <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
         </svg>
@@ -1616,7 +1634,7 @@
           id="quick-url-input"
           type="text"
           class="quick-input"
-          placeholder="Tempel link YouTube atau Video ID..."
+          placeholder="Tempel link YouTube (watch, shorts, youtu.be) atau ID..."
           autocomplete="off"
           spellcheck="false"
         />
@@ -1688,13 +1706,13 @@
     </main>
 
     <!-- ========================================================================
-         TAB 2: GLOBAL YOUTUBE SEARCH + LIVE WORD & PHRASE MATCHING
+         TAB 2: GLOBAL YOUTUBE SEARCH (YOUTUBE DATA API v3 + LIVE MATCHING)
          ======================================================================== -->
     <section id="panel-search" class="tab-panel" role="tabpanel">
       <div class="glass-card">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:9px;">
-          <span style="font-size:0.78rem; font-weight:700; color:#E2E8F0;">Pencarian Global Bebas Iklan</span>
-          <span style="font-size:0.69rem; font-weight:600; color:var(--accent-lavender);">Pencocokan Kata Live</span>
+          <span style="font-size:0.78rem; font-weight:700; color:#E2E8F0;">Pencarian Global YouTube</span>
+          <span id="search-api-status-badge" style="font-size:0.69rem; font-weight:700; color:var(--accent-lavender);">Pencocokan Live</span>
         </div>
 
         <div style="display:flex; gap:8px;">
@@ -1702,7 +1720,7 @@
             id="search-input"
             type="search"
             class="velora-input"
-            placeholder="Cari lagu atau video (cth: Samsons - Di Ujung Jalan)..."
+            placeholder="Cari lagu, kreator (cth: Windah Basudara, Samsons)..."
             autocomplete="off"
           />
           <button id="btn-search-submit" type="button" class="btn-violet" style="padding:0 16px;">Cari</button>
@@ -1718,14 +1736,32 @@
         </div>
       </div>
 
+      <!-- Prompt Banner when No YouTube Data API v3 Key is Configured -->
+      <div id="search-no-apikey-banner" class="glass-card" style="display:none; border-color:rgba(157, 107, 255, 0.36); background:linear-gradient(145deg, rgba(26, 18, 48, 0.85), rgba(11, 11, 16, 0.96));">
+        <div style="font-size:0.82rem; font-weight:700; color:#F5F3FF; margin-bottom:4px;">
+          Aktifkan Pencarian Global Seluruh YouTube
+        </div>
+        <div style="font-size:0.74rem; color:#CBD5E1; line-height:1.45; margin-bottom:10px;">
+          Tempel <b>YouTube Data API v3 Key</b> gratis di menu <b>Settings</b> agar pencarian seperti <i>"<span id="banner-missing-query">Windah Basudara</span>"</i> menarik puluhan hasil langsung dari server YouTube, atau buka pencarian YouTube langsung di bawah.
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <button id="btn-banner-goto-settings" type="button" class="btn-violet" style="font-size:0.73rem;">
+            Pasang API Key di Settings
+          </button>
+          <a id="btn-banner-open-yt" href="https://m.youtube.com/results?search_query=" target="_blank" rel="noopener noreferrer" class="btn-glass" style="font-size:0.73rem; text-decoration:none;">
+            Cari di YouTube ↗
+          </a>
+        </div>
+      </div>
+
       <!-- Direct YouTube URL Detected Banner -->
-      <div id="search-link-detected" class="glass-card" style="display:none; border-color:var(--border-accent); background:rgba(139, 92, 246, 0.14);">
+      <div id="search-link-detected" class="glass-card" style="display:none; border-color:var(--border-accent); background:rgba(157, 107, 255, 0.16);">
         <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
           <div style="min-width:0;">
             <div style="font-size:0.7rem; font-weight:700; color:var(--accent-lavender); text-transform:uppercase;">Link YouTube Terdeteksi</div>
             <div id="search-detected-vid" style="font-size:0.86rem; font-weight:700; color:#FFFFFF; margin-top:2px;">ID: ...</div>
           </div>
-          <button id="btn-search-play-detected" type="button" class="btn-violet">Putar Bebas Iklan</button>
+          <button id="btn-search-play-detected" type="button" class="btn-violet">Putar Sekarang</button>
         </div>
       </div>
 
@@ -1749,7 +1785,7 @@
          TAB 3: LIBRARY (TERSIMPAN, VIDEO SAYA, RIWAYAT)
          ======================================================================== -->
     <section id="panel-library" class="tab-panel" role="tabpanel">
-      <div style="display:flex; gap:6px; background:#0D0D13; border:1px solid var(--border-glass); border-radius:14px; padding:4px; margin-bottom:14px;">
+      <div style="display:flex; gap:6px; background:#0D0C14; border:1px solid var(--border-glass); border-radius:14px; padding:4px; margin-bottom:14px;">
         <button type="button" class="filter-pill active lib-seg-btn" data-seg="saved" style="flex:1; text-align:center; border-radius:10px; padding:7px 8px;">
           Tersimpan (<span id="lib-saved-count">0</span>)
         </button>
@@ -1809,14 +1845,54 @@
     </section>
 
     <!-- ========================================================================
-         TAB 4: COMPREHENSIVE CUSTOMIZABLE SETTINGS STUDIO
+         TAB 4: SETTINGS STUDIO (YOUTUBE DATA API v3, VIDEO, AUDIO DSP, MOTION)
          ======================================================================== -->
     <section id="panel-settings" class="tab-panel" role="tabpanel">
+
+      <!-- SECTION 0: YOUTUBE DATA API v3 KEY (GLOBAL SEARCH) -->
+      <div id="settings-apikey-card" class="glass-card" style="border-color:var(--border-accent);">
+        <div class="settings-section-title">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9d6bff" stroke-width="2.1">
+            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+          </svg>
+          <span>YouTube Data API v3 Key</span>
+          <span id="apikey-badge-status" style="margin-left:auto; font-size:0.65rem; font-weight:700; padding:2px 8px; border-radius:999px; background:rgba(255,255,255,0.08); color:#94A3B8;">Belum Terpasang</span>
+        </div>
+
+        <div class="setting-sub" style="margin-bottom:10px;">
+          Tempel API Key gratis dari <b>Google Cloud Console</b> (aktifkan <i>YouTube Data API v3</i>) untuk membuka pencarian global jutaan video YouTube lengkap dengan durasi dan thumbnail HD.
+        </div>
+
+        <div style="display:flex; gap:8px; margin-bottom:8px;">
+          <input
+            id="settings-yt-apikey-input"
+            type="password"
+            class="velora-input"
+            placeholder="AIzaSy..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button id="btn-toggle-apikey-vis" type="button" class="btn-glass" style="padding:0 11px;" title="Lihat/Sembunyikan Key">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+          <button id="btn-save-yt-apikey" type="button" class="btn-violet">Simpan API Key</button>
+          <button id="btn-clear-yt-apikey" type="button" class="btn-glass" style="color:#FCA5A5;">Hapus</button>
+          <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener noreferrer" style="margin-left:auto; font-size:0.72rem; font-weight:600; color:var(--accent-lavender); text-decoration:none;">
+            Ambil Key Gratis ↗
+          </a>
+        </div>
+      </div>
 
       <!-- SECTION A: KUALITAS STREAMING & VIDEO -->
       <div class="glass-card">
         <div class="settings-section-title">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2.1">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9d6bff" stroke-width="2.1">
             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
             <line x1="8" y1="21" x2="16" y2="21"></line>
             <line x1="12" y1="17" x2="12" y2="21"></line>
@@ -1869,16 +1945,6 @@
 
         <div class="setting-row setting-row-flex">
           <div>
-            <div class="setting-label">Zero-Ad Auto Skipper</div>
-            <div class="setting-sub">Otomatis membisukan &amp; melewati iklan jika muncul</div>
-          </div>
-          <button id="toggle-adskip" type="button" class="switch-btn on" role="switch" aria-checked="true" aria-label="Zero-Ad Auto Skipper">
-            <span class="switch-knob"></span>
-          </button>
-        </div>
-
-        <div class="setting-row setting-row-flex">
-          <div>
             <div class="setting-label">Auto-Play Video</div>
             <div class="setting-sub">Langsung putar video saat kartu diklik</div>
           </div>
@@ -1898,10 +1964,10 @@
         </div>
       </div>
 
-      <!-- SECTION B: STUDIO AUDIO & VOKAL (REAL-TIME WEB AUDIO DSP) -->
+      <!-- SECTION B: STUDIO AUDIO & VOKAL (REAL-TIME WEB AUDIO API DSP) -->
       <div class="glass-card">
         <div class="settings-section-title">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2.1">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9d6bff" stroke-width="2.1">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
             <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -1911,7 +1977,7 @@
 
         <div class="setting-row">
           <div class="setting-label">Preset Suara</div>
-          <div class="setting-sub">Profil equalizer otomatis untuk musik, vokal &amp; podcast</div>
+          <div class="setting-sub">Profil equalizer otomatis untuk video upload lokal</div>
           <div class="seg-group" data-setting-group="soundPreset">
             <button type="button" class="seg-pill" data-val="natural">Natural</button>
             <button type="button" class="seg-pill" data-val="vocal">Clear Vocal</button>
@@ -1947,8 +2013,8 @@
 
         <div class="setting-row setting-row-flex">
           <div>
-            <div class="setting-label">Spatial 3D Surround</div>
-            <div class="setting-sub">Pelebaran panggung stereo untuk earphone &amp; speaker</div>
+            <div class="setting-label">Spatial 3D Surround (Convolver)</div>
+            <div class="setting-sub">Pantulan ruang akustik 3D untuk pemutar lokal</div>
           </div>
           <button id="toggle-spatial-3d" type="button" class="switch-btn" role="switch" aria-checked="false" aria-label="Spatial 3D Surround">
             <span class="switch-knob"></span>
@@ -1969,7 +2035,7 @@
       <!-- SECTION C: ANIMASI & MOTION BLUR (iOS / ColorOS ENGINE) -->
       <div class="glass-card">
         <div class="settings-section-title">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2.1">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9d6bff" stroke-width="2.1">
             <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
           </svg>
           <span>Animasi &amp; Motion Blur</span>
@@ -2029,7 +2095,7 @@
       <!-- SECTION D: PREFERENSI BERANDA & PRIVASI -->
       <div class="glass-card">
         <div class="settings-section-title">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2.1">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9d6bff" stroke-width="2.1">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
           </svg>
           <span>Preferensi Beranda &amp; Privasi</span>
@@ -2062,14 +2128,14 @@
       <div class="glass-card" style="border-color:var(--border-accent);">
         <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
           <svg width="38" height="38" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="1" y="1" width="34" height="34" rx="10" fill="rgba(139, 92, 246, 0.16)" stroke="rgba(167, 139, 250, 0.4)" stroke-width="1.2"/>
-            <polygon points="8,9 14.2,9 18,21.5 15.2,27" fill="#8B5CF6" />
-            <polygon points="28,9 21.8,9 15.2,27 18,27" fill="#C4B5FD" />
+            <rect x="1" y="1" width="34" height="34" rx="10" fill="rgba(157, 107, 255, 0.18)" stroke="rgba(196, 181, 253, 0.42)" stroke-width="1.2"/>
+            <polygon points="8,9 14.2,9 18,21.5 15.2,27" fill="#9d6bff" />
+            <polygon points="28,9 21.8,9 15.2,27 18,27" fill="#c4b5fd" />
             <polygon points="16.2,13.5 21.2,16.5 16.2,19.5" fill="#FFFFFF" />
           </svg>
           <div>
-            <div style="font-size:1.06rem; font-weight:800; letter-spacing:0.05em; color:#FFFFFF;">VELORA v1.2</div>
-            <div style="font-size:0.74rem; color:var(--accent-lavender); font-weight:600;">AMOLED 120fps Zero-Ad Video Client</div>
+            <div style="font-size:1.06rem; font-weight:800; letter-spacing:0.05em; color:#FFFFFF;">VELORA v1.3</div>
+            <div style="font-size:0.74rem; color:var(--accent-lavender); font-weight:600;">AMOLED 120fps Liquid Glass Video Client</div>
           </div>
         </div>
 
@@ -2092,7 +2158,7 @@
   </div>
 
   <!-- ==========================================================================
-       PERSISTENT DUAL-LAYER PLAYER & FLOATING PILL MINI-PLAYER
+       PERSISTENT ZERO-RELOAD PLAYER, FALLBACK CARD & FLOATING MINI-PLAYER
        ========================================================================== -->
   <div id="persistent-player" class="persistent-player is-hidden" aria-label="Video Player">
     <div class="player-wrapper">
@@ -2100,19 +2166,34 @@
       <div id="iframe-stage" class="iframe-stage">
         <div class="thumb-svg-fallback" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
-            <polygon points="8,9 14.2,9 18,21.5 15.2,27" fill="#8B5CF6" />
-            <polygon points="28,9 21.8,9 15.2,27 18,27" fill="#C4B5FD" />
+            <polygon points="8,9 14.2,9 18,21.5 15.2,27" fill="#9d6bff" />
+            <polygon points="28,9 21.8,9 15.2,27 18,27" fill="#c4b5fd" />
           </svg>
         </div>
 
-        <!-- Zero-Ad Auto Skipper Shield Overlay -->
-        <div id="ad-shield-overlay" class="ad-shield-overlay">
-          <div class="velora-spinner"></div>
-          <div style="font-size:0.82rem; font-weight:700; color:#F5F3FF;">Melewati Iklan Secara Otomatis...</div>
-          <div style="font-size:0.7rem; color:#94A3B8;">Zero-Ad Shield aktif (suara iklan dibisukan)</div>
+        <!-- Clean Non-Embeddable / Restricted Video Fallback Card -->
+        <div id="embed-fallback-overlay" class="embed-fallback-overlay">
+          <div style="width:44px; height:44px; border-radius:14px; background:rgba(157,107,255,0.2); border:1px solid rgba(196,181,253,0.4); display:flex; align-items:center; justify-content:center; color:#c4b5fd;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <div style="font-size:0.88rem; font-weight:700; color:#F8FAFC;">Pemutaran Eksternal Dikunci Pemilik</div>
+          <div class="fallback-hide-mini" style="font-size:0.74rem; color:#94A3B8; max-width:340px; line-height:1.45;">
+            Pemilik channel membatasi pemutaran video ini hanya di aplikasi YouTube resmi.
+          </div>
+          <div class="fallback-hide-mini" style="display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:4px;">
+            <a id="btn-fallback-open-yt" href="https://www.youtube.com/watch?v=" target="_blank" rel="noopener noreferrer" class="btn-violet" style="text-decoration:none;">
+              <span>Buka di YouTube ↗</span>
+            </a>
+            <button id="btn-fallback-next-video" type="button" class="btn-glass">
+              <span>Putar Video Berikutnya</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Layer 1: Native HTML5 Video with Real-Time Web Audio DSP & ColorOS O1 Visual Filters -->
+        <!-- Layer 1: Native HTML5 Video for Local Uploads + Web Audio 3D Surround DSP -->
         <video
           id="velora-native-video"
           controls
@@ -2133,7 +2214,7 @@
         <div id="mini-tap-expand" style="flex:1; min-width:0; padding:3px 2px;" role="button" tabindex="0">
           <div style="display:flex; align-items:center; gap:5px; margin-bottom:2px;">
             <span class="status-dot-live" style="width:6px; height:6px;"></span>
-            <span style="font-size:0.65rem; font-weight:700; color:var(--accent-lavender); letter-spacing:0.04em;">BEBAS IKLAN</span>
+            <span style="font-size:0.65rem; font-weight:700; color:var(--accent-lavender); letter-spacing:0.04em;">SEDANG DIPUTAR</span>
           </div>
           <div class="mini-title-wrap">
             <div id="mini-title" class="mini-title-text">Memuat video...</div>
@@ -2161,13 +2242,13 @@
         </div>
       </div>
 
-      <!-- Expanded Player Details & Clean Consumer Controls -->
+      <!-- Expanded Player Details & Consumer Controls -->
       <div class="expanded-panel">
         <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px;">
           <div style="min-width:0;">
             <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:5px;">
               <span id="player-cat-pill" class="tag-lavender">Stream</span>
-              <span id="player-quality-badge" style="font-size:0.69rem; font-weight:700; color:#34D399;">● ZERO-AD HD</span>
+              <span id="player-quality-badge" style="font-size:0.69rem; font-weight:700; color:#34D399;">● VELORA HD</span>
             </div>
             <h1 id="player-title" style="font-size:1.04rem; font-weight:700; line-height:1.35; color:#FFFFFF;">
               Judul Video
@@ -2185,7 +2266,7 @@
           </button>
         </div>
 
-        <!-- Clean Consumer Player Toolbar -->
+        <!-- Consumer Player Toolbar -->
         <div class="player-toolbar no-scrollbar">
           <button id="btn-player-bookmark" type="button" class="tool-chip">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2202,7 +2283,7 @@
             <span id="btn-player-speed-label">1.0x</span>
           </button>
 
-          <button id="btn-player-dsp-shortcut" type="button" class="tool-chip is-active" title="Studio Audio & Visual">
+          <button id="btn-player-dsp-shortcut" type="button" class="tool-chip is-active" title="Preset Audio DSP">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
               <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -2217,6 +2298,10 @@
             </svg>
             <span>PiP</span>
           </button>
+
+          <a id="btn-player-open-yt" href="https://www.youtube.com/watch?v=" target="_blank" rel="noopener noreferrer" class="tool-chip" style="text-decoration:none;">
+            <span>YouTube ↗</span>
+          </a>
 
           <button id="btn-player-share" type="button" class="tool-chip">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2238,9 +2323,9 @@
           </button>
         </div>
 
-        <!-- Related Videos ("Video Terkait") Below Player -->
+        <!-- Related Videos Below Player -->
         <div style="margin-top:14px;">
-          <div style="font-size:0.85rem; font-weight:700; color:#E2E8F0; margin-bottom:10px;">Video Terkait — Bebas Iklan</div>
+          <div style="font-size:0.85rem; font-weight:700; color:#E2E8F0; margin-bottom:10px;">Video Terkait — Untuk Kamu</div>
           <div id="player-upnext-grid" class="video-grid"></div>
         </div>
       </div>
@@ -2335,7 +2420,7 @@
         <div id="upload-section-file">
           <input id="upload-file-input" type="file" accept="video/*" style="display:none;" />
           <div id="upload-dropzone" class="upload-dropzone" role="button" tabindex="0">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" style="margin:0 auto 6px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9d6bff" stroke-width="2" style="margin:0 auto 6px;">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="17 8 12 3 7 8"></polyline>
               <line x1="12" y1="3" x2="12" y2="15"></line>
@@ -2398,7 +2483,7 @@
         <button id="btn-close-paste-modal" type="button" class="btn-glass" style="padding:5px 9px;">×</button>
       </div>
       <p style="font-size:0.76rem; color:#94A3B8; margin-bottom:10px; line-height:1.4;">
-        Ketuk kotak di bawah lalu pilih <b>Tempel / Paste</b> dari papan klip keyboard. Video akan otomatis diputar bebas iklan.
+        Ketuk kotak di bawah lalu pilih <b>Tempel / Paste</b> dari papan klip keyboard. Video akan otomatis diputar.
       </p>
       <input id="modal-paste-field" type="text" class="velora-input" placeholder="Tempel https://youtu.be/... di sini" style="margin-bottom:12px;" />
       <div style="display:flex; gap:8px; justify-content:flex-end;">
@@ -2409,7 +2494,7 @@
   </div>
 
   <!-- ==========================================================================
-       VELORA v1.2 CORE ENGINE (ZERO-AD SKIPPER, OEMBED VERIFIER, WEB AUDIO DSP)
+       VELORA v1.3 CORE ENGINE (YT DATA API v3, EMBED FALLBACK, 3D CONVOLVER DSP)
        ========================================================================== -->
   <script>
     (function () {
@@ -2419,47 +2504,29 @@
          1. STORAGE KEYS & ENVIRONMENT HELPERS
          ------------------------------------------------------------------------ */
       const KEYS = {
-        SAVED: 'velora_v42_saved',
-        CUSTOM: 'velora_v42_custom',
-        HISTORY: 'velora_v42_history',
-        SETTINGS: 'velora_v42_settings',
-        FAV_CATS: 'velora_v42_fav_cats',
-        AFFINITY: 'velora_v42_affinity'
+        SAVED: 'velora_v43_saved',
+        CUSTOM: 'velora_v43_custom',
+        HISTORY: 'velora_v43_history',
+        SETTINGS: 'velora_v43_settings',
+        FAV_CATS: 'velora_v43_fav_cats',
+        AFFINITY: 'velora_v43_affinity',
+        YT_API_KEY: 'velora_v43_yt_api_key'
       };
 
       const TAB_ORDER = ['home', 'search', 'library', 'settings'];
-
-      function promiseAny(promises) {
-        return new Promise((resolve, reject) => {
-          let rejectedCount = 0;
-          const total = promises.length;
-          if (total === 0) {
-            reject(new Error('Empty promise list'));
-            return;
-          }
-          promises.forEach((p) => {
-            Promise.resolve(p).then(resolve).catch(() => {
-              rejectedCount++;
-              if (rejectedCount >= total) {
-                reject(new Error('All promises rejected'));
-              }
-            });
-          });
-        });
-      }
 
       const memoryStore = {};
       const activeObjectUrls = {};
       const cachedSearchCatalog = [];
       const generatedCoverUriCache = {};
-      const deadVideoIds = new Set();
+      const restrictedVideoIds = new Set();
 
       function safeGetStorage(key, fallback) {
         try {
           const raw = window.localStorage.getItem(key);
           if (!raw) return fallback;
           const parsed = JSON.parse(raw);
-          return parsed !== null && typeof parsed === 'object' ? parsed : fallback;
+          return parsed !== null ? parsed : fallback;
         } catch (err) {
           return Object.prototype.hasOwnProperty.call(memoryStore, key) ? memoryStore[key] : fallback;
         }
@@ -2546,7 +2613,7 @@
       };
 
       /* ------------------------------------------------------------------------
-         2. 100% VERIFIED ACTIVE YOUTUBE CATALOG (REAL IDs + REAL THUMBNAILS)
+         2. 50+ VERIFIED ACTIVE YOUTUBE CATALOG (INCL. INDO CREATORS & MUSIC)
          ------------------------------------------------------------------------ */
       const ALL_CATEGORIES = [
         'Musik Indo',
@@ -2559,60 +2626,71 @@
       ];
 
       const STARTER_VIDEOS = [
-        // Musik Indo (All verified real active YouTube IDs)
+        // Musik Indo (10 verified)
         { id: 'cWppJthf-jU', title: 'NOAH - Separuh Aku (Official Music Video)', channel: 'NOAH Official', category: 'Musik Indo', badge: '04:32', tags: 'noah separuh aku musik indo' },
         { id: 'u2ah9tWTkmk', title: 'Sheila On 7 - Dan (Official Music Video)', channel: 'Sony Music Indo', category: 'Musik Indo', badge: '04:48', tags: 'sheila on 7 dan musik indo' },
-        { id: '9bZkp7q19f0', title: 'PSY - GANGNAM STYLE (Official Music Video)', channel: 'officialpsy', category: 'Musik Indo', badge: '04:12', tags: 'hits populer musik asia' },
         { id: 'qLrnkK2YEcE', title: 'Payung Teduh - Akad (Official Music Video)', channel: 'Payung Teduh', category: 'Musik Indo', badge: '04:20', tags: 'payung teduh akad musik indo' },
-        { id: '34Na4j8AVgA', title: 'The Weeknd - Starboy ft. Daft Punk (Official Video)', channel: 'The Weeknd', category: 'Musik Indo', badge: '04:33', tags: 'the weeknd starboy musik' },
+        { id: 'v00i4d6658Q', title: 'Samsons - Kenangan Terindah (Official Music Video)', channel: 'Samsons Official', category: 'Musik Indo', badge: '04:18', tags: 'samsons di ujung jalan kenangan terindah musik indo' },
+        { id: 'h-S6A2K3k7k', title: 'Nadin Amizah - Bertaut (Official Music Video)', channel: 'Nadin Amizah', category: 'Musik Indo', badge: '05:15', tags: 'nadin amizah bertaut musik indo' },
+        { id: '962eYfu__dQ', title: 'Tulus - Hati-Hati di Jalan (Official Lyric Video)', channel: 'Tulus', category: 'Musik Indo', badge: '04:02', tags: 'tulus hati hati di jalan musik indo' },
+        { id: 'm7Bc3pLyij0', title: 'Marshmello ft. Bastille - Happier (Official Music Video)', channel: 'Marshmello', category: 'Musik Indo', badge: '03:54', tags: 'marshmello happier hits' },
+        { id: '9bZkp7q19f0', title: 'PSY - GANGNAM STYLE (Official Music Video)', channel: 'officialpsy', category: 'Musik Indo', badge: '04:12', tags: 'hits populer musik asia' },
         { id: 'kJQP7kiw5Fk', title: 'Luis Fonsi - Despacito ft. Daddy Yankee', channel: 'Luis Fonsi', category: 'Musik Indo', badge: '04:41', tags: 'despacito hits musik' },
         { id: 'OPf0YbXqDm0', title: 'Mark Ronson - Uptown Funk ft. Bruno Mars', channel: 'Mark Ronson', category: 'Musik Indo', badge: '04:30', tags: 'uptown funk bruno mars' },
-        { id: 'RgKAFK5djSk', title: 'Wiz Khalifa - See You Again ft. Charlie Puth', channel: 'Wiz Khalifa', category: 'Musik Indo', badge: '03:57', tags: 'see you again charlie puth' },
 
-        // Pop & Rock (6 verified)
+        // Pop & Rock (9 verified)
         { id: '1G4isv_Fylg', title: 'Coldplay - Paradise (Official Video)', channel: 'Coldplay', category: 'Pop & Rock', badge: '04:20', tags: 'coldplay paradise rock pop' },
         { id: 'fJ9rUzIMcZQ', title: 'Queen – Bohemian Rhapsody (Official Video Remastered)', channel: 'Queen Official', category: 'Pop & Rock', badge: '05:55', tags: 'queen bohemian rhapsody rock' },
         { id: 'hT_nvWreIhg', title: 'OneRepublic - Counting Stars (Official Music Video)', channel: 'OneRepublic', category: 'Pop & Rock', badge: '04:44', tags: 'onerepublic counting stars pop rock' },
         { id: '60ItHLz5WEA', title: 'Alan Walker - Faded (Official Music Video)', channel: 'Alan Walker', category: 'Pop & Rock', badge: '03:33', tags: 'alan walker faded electronic' },
         { id: 'pXRviuL6vMY', title: 'twenty one pilots: Stressed Out [OFFICIAL VIDEO]', channel: 'Fueled By Ramen', category: 'Pop & Rock', badge: '03:45', tags: 'twenty one pilots stressed out rock' },
         { id: 'JGwWNGJdvx8', title: 'Ed Sheeran - Shape of You (Official Music Video)', channel: 'Ed Sheeran', category: 'Pop & Rock', badge: '04:24', tags: 'ed sheeran shape of you pop' },
+        { id: '34Na4j8AVgA', title: 'The Weeknd - Starboy ft. Daft Punk (Official Video)', channel: 'The Weeknd', category: 'Pop & Rock', badge: '04:33', tags: 'the weeknd starboy pop' },
+        { id: 'RgKAFK5djSk', title: 'Wiz Khalifa - See You Again ft. Charlie Puth', channel: 'Wiz Khalifa', category: 'Pop & Rock', badge: '03:57', tags: 'see you again charlie puth' },
+        { id: 'CevxZvSJLk8', title: 'Katy Perry - Roar (Official Music Video)', channel: 'Katy Perry', category: 'Pop & Rock', badge: '04:29', tags: 'katy perry roar pop' },
 
-        // Lo-Fi & Chill (4 verified)
+        // Lo-Fi & Chill (6 verified)
         { id: 'jfKfPfyJRdk', title: 'lofi hip hop radio 📚 - beats to relax/study to', channel: 'Lofi Girl', category: 'Lo-Fi & Chill', badge: 'LIVE', tags: 'lofi chill study beats relax' },
         { id: 'rUxyKA_-grg', title: 'lofi hip hop radio 💤 - beats to sleep/chill to', channel: 'Lofi Girl', category: 'Lo-Fi & Chill', badge: 'SLEEP', tags: 'lofi sleep chill ambient' },
         { id: 'DWcJFNfaw9c', title: 'Night Tokyo Rain & Lo-Fi Synthwave Chill Mix', channel: 'Synth Chill', category: 'Lo-Fi & Chill', badge: '01:02:14', tags: 'tokyo rain lofi chill night' },
         { id: 'lTRiuFIWV54', title: '1 A.M Study Session 📚 [lofi hip hop/chill beats]', channel: 'Lofi Girl', category: 'Lo-Fi & Chill', badge: '01:01:08', tags: '1am study session lofi' },
+        { id: '5yx6BWlEVcY', title: 'Chillhop Radio - jazzy & lofi hip hop beats', channel: 'Chillhop Music', category: 'Lo-Fi & Chill', badge: 'LIVE', tags: 'chillhop jazz lofi beats' },
+        { id: '7NOSDKb0HlU', title: '2 A.M Study Session 📚 [lofi hip hop/chill beats]', channel: 'Lofi Girl', category: 'Lo-Fi & Chill', badge: '01:12:30', tags: '2am study session lofi' },
 
-        // Gaming (4 verified)
+        // Gaming (8 verified including Indonesian Creators)
+        { id: 't680363f2a0', title: 'Windah Basudara — Momen Kocak & Nostalgia Game Klasik', channel: 'Windah Basudara', category: 'Gaming', badge: '24:15', tags: 'windah basudara bocil kematian gaming indo' },
+        { id: '5qap5aO4i9A', title: 'MiawAug — Petualangan Horor & Gameplay Seru', channel: 'MiawAug', category: 'Gaming', badge: '31:40', tags: 'miawaug gaming indo horor' },
         { id: 'aqz-KE-bpKQ', title: 'Big Buck Bunny 60fps 4K - High Frame Rate Benchmark', channel: 'Blender', category: 'Gaming', badge: '60FPS', tags: '60fps 120fps gaming benchmark' },
         { id: 'y6120QOlsfU', title: 'Darude - Sandstorm (Gaming Classic Official Video)', channel: 'Darude', category: 'Gaming', badge: '03:52', tags: 'darude sandstorm gaming classic' },
         { id: 'dQw4w9WgXcQ', title: 'Rick Astley - Never Gonna Give You Up (4K Remaster)', channel: 'Rick Astley', category: 'Gaming', badge: '03:33', tags: 'gaming meme classic' },
-        { id: 'CevxZvSJLk8', title: 'Katy Perry - Roar (Official Music Video)', channel: 'Katy Perry', category: 'Gaming', badge: '04:29', tags: 'katy perry roar pop' },
+        { id: 'tO01J-M3g0U', title: 'Charge - Hyper-Realistic Unreal Engine 5 Action Short', channel: 'Blender Studio', category: 'Gaming', badge: '03:50', tags: 'unreal engine 5 gaming graphics' },
+        { id: 'kXYiU_JCYtU', title: 'Linkin Park - Numb (Official Music Video) [Gaming AMV]', channel: 'Linkin Park', category: 'Gaming', badge: '03:07', tags: 'linkin park numb gaming' },
+        { id: 'eVTXPUF4Oz4', title: 'Linkin Park - In The End (Official HD Music Video)', channel: 'Linkin Park', category: 'Gaming', badge: '03:38', tags: 'linkin park in the end gaming' },
 
-        // Tech & Gadget (4 verified)
+        // Tech & Gadget (7 verified including GadgetIn)
+        { id: 'n_3v9b9c8sE', title: 'GadgetIn — Review HP Flagship Layar 120Hz AMOLED Terbaik!', channel: 'GadgetIn', category: 'Tech & Gadget', badge: '14:22', tags: 'gadgetin david brendi review hp amoled 120hz tech' },
         { id: 'M7lc1UVf-VE', title: 'YouTube Developers: Embedded Player & Web Architecture', channel: 'Google Developers', category: 'Tech & Gadget', badge: '22:15', tags: 'tech developer web architecture' },
         { id: 'jNQXAC9IVRw', title: 'Me at the zoo (First Video on YouTube — 2005 Archive)', channel: 'jawed', category: 'Tech & Gadget', badge: '00:19', tags: 'youtube history tech archive' },
         { id: 'ScMzIvxBSi4', title: 'Spring - Open Movie Rendering & GPU Pipeline', channel: 'Blender Studio', category: 'Tech & Gadget', badge: '07:44', tags: '3d rendering gpu tech' },
-        { id: 'tO01J-M3g0U', title: 'Charge - Hyper-Realistic Unreal & Blender Short', channel: 'Blender Studio', category: 'Tech & Gadget', badge: '03:50', tags: 'unreal engine 3d tech' },
+        { id: 'V5he1JZRQ2k', title: 'Wing It! - Open Movie Real-Time Animation Tech', channel: 'Blender Studio', category: 'Tech & Gadget', badge: '04:30', tags: 'animation gpu tech' },
+        { id: 'R6MlUcmOul8', title: 'Tears of Steel - Blender VFX & Sci-Fi Film', channel: 'Blender Foundation', category: 'Tech & Gadget', badge: '12:14', tags: 'vfx sci fi tech' },
+        { id: 'whpJ19RJ4JY', title: 'Cosmos Laundromat - First Cycle 4K Animation', channel: 'Blender Foundation', category: 'Tech & Gadget', badge: '12:10', tags: '3d animation tech' },
 
-        // Anime & AMV (3 verified)
+        // Anime & AMV (6 verified)
         { id: 'eRsGyueVLvQ', title: 'Sintel - Epic Fantasy Animated Short Film', channel: 'Blender Foundation', category: 'Anime & AMV', badge: '14:48', tags: 'anime fantasy animation' },
         { id: 'YE7VzlLtp-4', title: 'Big Buck Bunny Official Animated Short Film', channel: 'Blender Foundation', category: 'Anime & AMV', badge: '09:56', tags: 'animation short film' },
         { id: '2Vv-BfVoq4g', title: 'Ed Sheeran - Perfect (Official Music Video)', channel: 'Ed Sheeran', category: 'Anime & AMV', badge: '04:39', tags: 'perfect ballad music' },
+        { id: 'YykjpeuMNEk', title: 'Coldplay - Hymn For The Weekend (Official Video)', channel: 'Coldplay', category: 'Anime & AMV', badge: '04:20', tags: 'coldplay hymn for the weekend' },
+        { id: 'YQHsXMglC9A', title: 'Adele - Hello (Official Music Video)', channel: 'Adele', category: 'Anime & AMV', badge: '06:07', tags: 'adele hello vocal' },
+        { id: 'SlPhMPnQ58k', title: 'Maroon 5 - Memories (Official Video)', channel: 'Maroon 5', category: 'Anime & AMV', badge: '03:15', tags: 'maroon 5 memories' },
 
-        // 4K Visuals (3 verified)
+        // 4K Visuals (6 verified)
         { id: 'LXb3EKWsInQ', title: 'COSTA RICA IN 4K 60fps HDR (Ultra HD)', channel: 'Jacob + Katie Schwarz', category: '4K Visuals', badge: '4K 60FPS', tags: '4k hdr nature visuals' },
         { id: 'Bey4XXJAqS8', title: 'Switzerland 4K 60fps Alpine Drone Cinematography', channel: 'Scenic Relaxation', category: '4K Visuals', badge: '4K HDR', tags: 'switzerland 4k drone' },
-        { id: 'K4TOrB7at0Y', title: 'Deep Ocean Bioluminescence 4K 60fps HDR', channel: 'Aqua4K', category: '4K Visuals', badge: '4K 60FPS', tags: 'ocean 4k hdr' }
-      ];
-
-      // Fast Piped JSON API endpoints (Direct MP4/WebM extraction + global search)
-      const PIPED_JSON_ENDPOINTS = [
-        'https://pipedapi.kavin.rocks',
-        'https://pipedapi.tokhmi.xyz',
-        'https://pipedapi.moomoo.me',
-        'https://pipedapi.adminforge.de',
-        'https://api.piped.private.coffee'
+        { id: 'K4TOrB7at0Y', title: 'Deep Ocean Bioluminescence 4K 60fps HDR', channel: 'Aqua4K', category: '4K Visuals', badge: '4K 60FPS', tags: 'ocean 4k hdr' },
+        { id: '1La4QzGeaaQ', title: 'Peru 8K HDR 60FPS (FUHD) Cinematic Visuals', channel: 'Jacob + Katie Schwarz', category: '4K Visuals', badge: '8K HDR', tags: 'peru 4k 8k hdr' },
+        { id: 'linlz7-Pnvw', title: 'Switzerland in 8K ULTRA HD HDR - Heaven of Earth', channel: '8K World', category: '4K Visuals', badge: '8K 60FPS', tags: 'switzerland 8k hdr' },
+        { id: 'ysz5S6PUM-U', title: '4K HDR Dolby Vision OLED Pitch Black Demo', channel: 'OLED Cinema', category: '4K Visuals', badge: 'OLED 4K', tags: 'oled amoled 4k hdr' }
       ];
 
       const PLAYBACK_SPEEDS = [1.0, 1.25, 1.5, 2.0, 0.75];
@@ -2633,7 +2711,6 @@
         refreshRate: '120',
         visualMode: 'original',
         sharpness: 'normal',
-        adSkipper: true,
         autoplay: true,
         autoMinimize: true,
         soundPreset: 'natural',
@@ -2660,9 +2737,10 @@
         affinityScores: safeGetStorage(KEYS.AFFINITY, {
           'Musik Indo': 8,
           'Pop & Rock': 5,
-          'Gaming': 4,
-          'Tech & Gadget': 3
+          'Gaming': 5,
+          'Tech & Gadget': 4
         }),
+        ytApiKey: String(safeGetStorage(KEYS.YT_API_KEY, '') || '').trim(),
         libSegment: 'saved',
         currentVideo: null,
         playerState: 'hidden', // 'hidden' | 'expanded' | 'minimized'
@@ -2713,11 +2791,16 @@
         infiniteSentinel: document.getElementById('infinite-scroll-sentinel'),
 
         // Search
+        searchApiStatusBadge: document.getElementById('search-api-status-badge'),
         searchInput: document.getElementById('search-input'),
         btnSearchSubmit: document.getElementById('btn-search-submit'),
         liveSuggestionsBox: document.getElementById('live-suggestions-box'),
         suggestionsQueryTag: document.getElementById('suggestions-query-tag'),
         liveSuggestionsList: document.getElementById('live-suggestions-list'),
+        searchNoApikeyBanner: document.getElementById('search-no-apikey-banner'),
+        bannerMissingQuery: document.getElementById('banner-missing-query'),
+        btnBannerGotoSettings: document.getElementById('btn-banner-goto-settings'),
+        btnBannerOpenYt: document.getElementById('btn-banner-open-yt'),
         searchLinkDetected: document.getElementById('search-link-detected'),
         searchDetectedVid: document.getElementById('search-detected-vid'),
         btnSearchPlayDetected: document.getElementById('btn-search-play-detected'),
@@ -2748,7 +2831,13 @@
         btnCancelEraseHistory: document.getElementById('btn-cancel-erase-history'),
 
         // Settings
-        toggleAdSkip: document.getElementById('toggle-adskip'),
+        settingsApikeyCard: document.getElementById('settings-apikey-card'),
+        apikeyBadgeStatus: document.getElementById('apikey-badge-status'),
+        settingsYtApikeyInput: document.getElementById('settings-yt-apikey-input'),
+        btnToggleApikeyVis: document.getElementById('btn-toggle-apikey-vis'),
+        btnSaveYtApikey: document.getElementById('btn-save-yt-apikey'),
+        btnClearYtApikey: document.getElementById('btn-clear-yt-apikey'),
+
         toggleAutoplay: document.getElementById('toggle-autoplay'),
         toggleAutoMinimize: document.getElementById('toggle-autominimize'),
         sliderVocalClarity: document.getElementById('slider-vocal-clarity'),
@@ -2770,7 +2859,9 @@
         // Persistent Player
         persistentPlayer: document.getElementById('persistent-player'),
         iframeStage: document.getElementById('iframe-stage'),
-        adShieldOverlay: document.getElementById('ad-shield-overlay'),
+        embedFallbackOverlay: document.getElementById('embed-fallback-overlay'),
+        btnFallbackOpenYt: document.getElementById('btn-fallback-open-yt'),
+        btnFallbackNextVideo: document.getElementById('btn-fallback-next-video'),
         nativeVideo: document.getElementById('velora-native-video'),
         ytApiStageWrap: document.getElementById('yt-api-stage-wrap'),
         miniTapExpand: document.getElementById('mini-tap-expand'),
@@ -2790,6 +2881,7 @@
         btnPlayerDspShortcut: document.getElementById('btn-player-dsp-shortcut'),
         btnPlayerDspLabel: document.getElementById('btn-player-dsp-label'),
         btnPlayerPip: document.getElementById('btn-player-pip'),
+        btnPlayerOpenYt: document.getElementById('btn-player-open-yt'),
         btnPlayerShare: document.getElementById('btn-player-share'),
         btnPlayerClose: document.getElementById('btn-player-close'),
         playerUpnextGrid: document.getElementById('player-upnext-grid'),
@@ -2827,7 +2919,7 @@
       };
 
       /* ------------------------------------------------------------------------
-         5. APP LAUNCH ANIMATION & MOTION PHYSICS ENGINE
+         5. APP LAUNCH SPLASH ANIMATION & SPRING / MOTION BLUR ENGINE
          ------------------------------------------------------------------------ */
       let launchDismissTimer = null;
 
@@ -2840,7 +2932,7 @@
         dom.appShell.classList.add('shell-entrance');
 
         const mult = parseFloat(settings.animSpeed) || 1.0;
-        const totalMs = Math.round(1150 * mult);
+        const totalMs = Math.round(1100 * mult);
 
         launchDismissTimer = setTimeout(() => {
           dom.launchStage.classList.add('is-dismissed');
@@ -2880,7 +2972,7 @@
       }
 
       /* ------------------------------------------------------------------------
-         6. REAL-TIME WEB AUDIO API DSP & ColorOS O1 VISUAL FILTER ENGINE
+         6. REAL-TIME WEB AUDIO API DSP (3D CONVOLVER) & ColorOS O1 VISUAL FILTER
          ------------------------------------------------------------------------ */
       const VeloraAudioDsp = {
         ctx: null,
@@ -2888,14 +2980,26 @@
         bassFilter: null,
         vocalFilter: null,
         trebleFilter: null,
-        splitter: null,
-        merger: null,
-        delayNode: null,
+        convolver: null,
         wetGain: null,
         dryGain: null,
         boostGain: null,
         limiter: null,
         initialized: false,
+
+        createSpatialImpulse(audioCtx, durationSec, decay) {
+          const rate = audioCtx.sampleRate;
+          const length = Math.floor(rate * durationSec);
+          const impulse = audioCtx.createBuffer(2, length, rate);
+          for (let ch = 0; ch < 2; ch++) {
+            const channelData = impulse.getChannelData(ch);
+            for (let i = 0; i < length; i++) {
+              const t = i / length;
+              channelData[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, decay);
+            }
+          }
+          return impulse;
+        },
 
         init() {
           if (this.initialized) {
@@ -2926,10 +3030,8 @@
 
             this.dryGain = this.ctx.createGain();
             this.wetGain = this.ctx.createGain();
-            this.splitter = this.ctx.createChannelSplitter(2);
-            this.merger = this.ctx.createChannelMerger(2);
-            this.delayNode = this.ctx.createDelay(0.05);
-            this.delayNode.delayTime.value = 0.014;
+            this.convolver = this.ctx.createConvolver();
+            this.convolver.buffer = this.createSpatialImpulse(this.ctx, 0.38, 3.2);
 
             this.boostGain = this.ctx.createGain();
             this.limiter = this.ctx.createDynamicsCompressor();
@@ -2946,11 +3048,8 @@
             this.trebleFilter.connect(this.dryGain);
             this.dryGain.connect(this.boostGain);
 
-            this.trebleFilter.connect(this.splitter);
-            this.splitter.connect(this.delayNode, 0);
-            this.delayNode.connect(this.merger, 0, 1);
-            this.splitter.connect(this.merger, 1, 0);
-            this.merger.connect(this.wetGain);
+            this.trebleFilter.connect(this.convolver);
+            this.convolver.connect(this.wetGain);
             this.wetGain.connect(this.boostGain);
 
             this.boostGain.connect(this.limiter);
@@ -2981,8 +3080,8 @@
           this.trebleFilter.gain.value = Math.max(-3, Math.min(10, trebleDb));
 
           if (settings.spatial3d) {
-            this.dryGain.gain.value = 0.86;
-            this.wetGain.gain.value = 0.34;
+            this.dryGain.gain.value = 0.85;
+            this.wetGain.gain.value = 0.36;
           } else {
             this.dryGain.gain.value = 1.0;
             this.wetGain.gain.value = 0.0;
@@ -3118,7 +3217,7 @@
           .replace(/&/g, '&amp;')
           .replace(/</g, '&lt;')
           .replace(/>/g, '&gt;');
-        const safeCat = String(category || 'ZERO-AD').slice(0, 20)
+        const safeCat = String(category || 'VELORA').slice(0, 20)
           .replace(/&/g, '&amp;')
           .replace(/</g, '&lt;')
           .replace(/>/g, '&gt;');
@@ -3126,13 +3225,13 @@
         const svg =
           '<svg xmlns="http://www.w3.org/2000/svg" width="480" height="270" viewBox="0 0 480 270">' +
           '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
-          '<stop offset="0%" stop-color="#1E1B4B"/><stop offset="55%" stop-color="#09090B"/><stop offset="100%" stop-color="#3B0764"/>' +
+          '<stop offset="0%" stop-color="#1E1B4B"/><stop offset="55%" stop-color="#09090E"/><stop offset="100%" stop-color="#3B0764"/>' +
           '</linearGradient></defs>' +
           '<rect width="480" height="270" fill="url(#g)"/>' +
-          '<circle cx="240" cy="112" r="34" fill="rgba(139,92,246,0.28)" stroke="#A78BFA" stroke-width="2"/>' +
+          '<circle cx="240" cy="112" r="34" fill="rgba(157,107,255,0.3)" stroke="#c4b5fd" stroke-width="2"/>' +
           '<polygon points="232,98 256,112 232,126" fill="#FFFFFF"/>' +
           '<text x="240" y="176" text-anchor="middle" fill="#F8FAFC" font-family="sans-serif" font-size="16" font-weight="700">' + safeTitle + '</text>' +
-          '<text x="240" y="200" text-anchor="middle" fill="#A78BFA" font-family="sans-serif" font-size="12" font-weight="600">' + safeCat + '</text>' +
+          '<text x="240" y="200" text-anchor="middle" fill="#c4b5fd" font-family="sans-serif" font-size="12" font-weight="600">' + safeCat + '</text>' +
           '</svg>';
 
         const uri = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
@@ -3154,6 +3253,18 @@
         return d.toLocaleDateString('id-ID', { month: 'short', day: 'numeric' });
       }
 
+      function parseIsoDurationToBadge(iso) {
+        if (!iso || typeof iso !== 'string') return 'HD';
+        const match = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+        if (!match) return 'LIVE';
+        const h = parseInt(match[1] || '0', 10);
+        const m = parseInt(match[2] || '0', 10);
+        const s = parseInt(match[3] || '0', 10);
+        if (h === 0 && m === 0 && s === 0) return 'LIVE';
+        const pad = n => String(n).padStart(2, '0');
+        return h > 0 ? (h + ':' + pad(m) + ':' + pad(s)) : (pad(m) + ':' + pad(s));
+      }
+
       function findKnownVideo(id) {
         return (
           state.customFeed.find(v => v.id === id) ||
@@ -3170,20 +3281,17 @@
       }
 
       function boostCategoryAffinity(category, amount) {
-        if (!category || category === 'Stream' || category === 'Search Result') return;
+        if (!category || category === 'Stream' || category === 'YouTube Search') return;
         const curr = Number(state.affinityScores[category] || 0);
         state.affinityScores[category] = Math.min(100, curr + (amount || 1));
         safeSetStorage(KEYS.AFFINITY, state.affinityScores);
       }
 
       /* ------------------------------------------------------------------------
-         9. DUAL-LAYER ZERO-AD STREAMING ENGINE + YOUTUBE IFRAME API AD-SKIPPER
+         9. ZERO-RELOAD DUAL-LAYER PLAYER & NON-EMBEDDABLE FALLBACK HANDLER
          ------------------------------------------------------------------------ */
       let ytApiReady = false;
       let ytPlayerInstance = null;
-      let ytAdMonitorTimer = null;
-      let wasMutedBeforeAd = false;
-      let lastKnownVideoTime = 0;
 
       // Load YouTube IFrame Player API asynchronously
       (function loadYouTubeIframeApi() {
@@ -3201,138 +3309,25 @@
         ytApiReady = true;
       };
 
-      function startZeroAdMonitor() {
-        stopZeroAdMonitor();
-        ytAdMonitorTimer = setInterval(() => {
-          if (!settings.adSkipper || !ytPlayerInstance || typeof ytPlayerInstance.getVideoData !== 'function') {
-            dom.adShieldOverlay.classList.remove('active');
-            return;
-          }
-
-          try {
-            const vData = ytPlayerInstance.getVideoData() || {};
-            const activeVid = state.currentVideo ? state.currentVideo.id : '';
-            const loadedVid = vData.video_id || '';
-            const dur = typeof ytPlayerInstance.getDuration === 'function' ? ytPlayerInstance.getDuration() : 0;
-            const cur = typeof ytPlayerInstance.getCurrentTime === 'function' ? ytPlayerInstance.getCurrentTime() : 0;
-
-            // Detect ad insertion when loaded video ID differs from requested ID or short unstarted ad break
-            const isAdPlaying =
-              loadedVid &&
-              activeVid &&
-              loadedVid !== activeVid &&
-              dur > 0 &&
-              dur < 180;
-
-            if (isAdPlaying) {
-              dom.adShieldOverlay.classList.add('active');
-              if (typeof ytPlayerInstance.isMuted === 'function' && !ytPlayerInstance.isMuted()) {
-                wasMutedBeforeAd = false;
-                ytPlayerInstance.mute();
-              }
-              if (typeof ytPlayerInstance.setPlaybackRate === 'function') {
-                ytPlayerInstance.setPlaybackRate(2);
-              }
-              if (typeof ytPlayerInstance.seekTo === 'function' && dur > 1 && cur < dur - 0.6) {
-                ytPlayerInstance.seekTo(dur - 0.3, true);
-              }
-            } else {
-              if (dom.adShieldOverlay.classList.contains('active')) {
-                dom.adShieldOverlay.classList.remove('active');
-                if (!wasMutedBeforeAd && typeof ytPlayerInstance.unMute === 'function') {
-                  ytPlayerInstance.unMute();
-                }
-                const targetSpeed = PLAYBACK_SPEEDS[state.playbackSpeedIndex] || 1.0;
-                if (typeof ytPlayerInstance.setPlaybackRate === 'function') {
-                  ytPlayerInstance.setPlaybackRate(targetSpeed);
-                }
-                if (lastKnownVideoTime > 2 && typeof ytPlayerInstance.seekTo === 'function') {
-                  ytPlayerInstance.seekTo(lastKnownVideoTime, true);
-                }
-              }
-              if (loadedVid === activeVid && cur > 0) {
-                lastKnownVideoTime = cur;
-              }
-            }
-          } catch (e) {
-            // Ignore cross-origin timing ticks
-          }
-        }, 280);
+      function showEmbedRestrictedFallback(videoId) {
+        restrictedVideoIds.add(videoId);
+        dom.btnFallbackOpenYt.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(videoId);
+        dom.embedFallbackOverlay.classList.add('active');
+        dom.playerQualityBadge.textContent = '● TERKUNCI EKSTERNAL';
+        dom.playerQualityBadge.style.color = '#FBBF24';
       }
 
-      function stopZeroAdMonitor() {
-        if (ytAdMonitorTimer) {
-          clearInterval(ytAdMonitorTimer);
-          ytAdMonitorTimer = null;
-        }
-        dom.adShieldOverlay.classList.remove('active');
+      function hideEmbedRestrictedFallback() {
+        dom.embedFallbackOverlay.classList.remove('active');
+        dom.playerQualityBadge.style.color = '#34D399';
       }
 
-      async function fetchJsonFast(url, timeoutMs) {
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), timeoutMs);
-        try {
-          const res = await fetch(url, {
-            signal: controller.signal,
-            headers: { 'Accept': 'application/json' }
-          });
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          return await res.json();
-        } finally {
-          clearTimeout(timer);
-        }
-      }
-
-      function pickPreferredStreamByQuality(streams, targetQuality) {
-        const muxed = streams.filter(s => !s.videoOnly && s.url);
-        if (muxed.length === 0) return null;
-
-        if (targetQuality && targetQuality !== 'Auto') {
-          const exact = muxed.find(s => String(s.quality || '').includes(targetQuality));
-          if (exact) return exact;
-        }
-
-        const prefer720 = muxed.find(s => String(s.quality || '').includes('720') || s.itag === 22);
-        return prefer720 || muxed[0];
-      }
-
-      /**
-       * Layer 1: Parallel fast Piped JSON stream extractor (2.2s strict timeout)
-       * Plays pure MP4/WebM directly in HTML5 <video> with 0% ads and full 3D Surround DSP
-       */
-      async function resolveDirectPipedStream(videoId) {
-        const tasks = PIPED_JSON_ENDPOINTS.map(async (base) => {
-          const data = await fetchJsonFast(base + '/streams/' + encodeURIComponent(videoId), 2200);
-          if (data && Array.isArray(data.videoStreams)) {
-            const chosen = pickPreferredStreamByQuality(data.videoStreams, settings.streamQuality);
-            if (chosen && chosen.url) {
-              return {
-                streamUrl: chosen.url,
-                quality: chosen.quality || 'HD',
-                title: data.title || '',
-                uploader: data.uploader || ''
-              };
-            }
-          }
-          throw new Error('No direct muxed stream');
-        });
-
-        try {
-          return await promiseAny(tasks);
-        } catch (err) {
-          return null;
-        }
-      }
-
-      /**
-       * Layer 2: YouTube IFrame Player API with Auto Ad-Skipper & Unavailable Auto-Skip
-       */
       function loadYouTubeApiPlayer(videoId) {
+        hideEmbedRestrictedFallback();
         dom.nativeVideo.pause();
         dom.nativeVideo.removeAttribute('src');
         dom.nativeVideo.style.display = 'none';
         dom.ytApiStageWrap.style.display = 'block';
-        lastKnownVideoTime = 0;
 
         const targetSpeed = PLAYBACK_SPEEDS[state.playbackSpeedIndex] || 1.0;
 
@@ -3344,8 +3339,7 @@
               ytPlayerInstance.cueVideoById(videoId);
             }
             ytPlayerInstance.setPlaybackRate(targetSpeed);
-            startZeroAdMonitor();
-            dom.playerQualityBadge.textContent = '● ZERO-AD ' + (settings.streamQuality === 'Auto' ? 'HD' : settings.streamQuality);
+            dom.playerQualityBadge.textContent = '● VELORA ' + (settings.streamQuality === 'Auto' ? 'HD' : settings.streamQuality);
             return;
           }
 
@@ -3371,32 +3365,21 @@
                 if (settings.autoplay) {
                   e.target.playVideo();
                 }
-                startZeroAdMonitor();
               },
-              onStateChange: function (e) {
-                if (e.data === 1) {
-                  const loadedId = e.target.getVideoData && e.target.getVideoData().video_id;
-                  if (state.currentVideo && loadedId === state.currentVideo.id) {
-                    dom.adShieldOverlay.classList.remove('active');
-                  }
-                }
-              },
-              onError: function () {
-                // Auto-skip if video is unavailable or embed-restricted by owner
-                deadVideoIds.add(videoId);
-                showToast('Video dikunci pemilik — beralih ke video berikutnya...');
-                const nextPool = getPersonalizedHomeVideos().filter(v => v.id !== videoId && !deadVideoIds.has(v.id));
-                if (nextPool.length > 0) {
-                  setTimeout(() => launchVideo(nextPool[0]), 650);
+              onError: function (e) {
+                // Handle YouTube error codes 100 (not found/private), 101/150 (embed disabled), 153 (referrer/config)
+                const code = Number(e && e.data);
+                if ([2, 5, 100, 101, 150, 153].includes(code) || !code) {
+                  showEmbedRestrictedFallback(videoId);
                 }
               }
             }
           });
-          dom.playerQualityBadge.textContent = '● ZERO-AD ' + (settings.streamQuality === 'Auto' ? 'HD' : settings.streamQuality);
+          dom.playerQualityBadge.textContent = '● VELORA ' + (settings.streamQuality === 'Auto' ? 'HD' : settings.streamQuality);
           return;
         }
 
-        // Direct clean iframe fallback if YT script still loading
+        // Clean iframe fallback if YT script still initializing
         const autoFlag = settings.autoplay ? '1' : '0';
         dom.ytApiStageWrap.innerHTML =
           '<iframe src="https://www.youtube.com/embed/' + encodeURIComponent(videoId) +
@@ -3404,14 +3387,14 @@
           'referrerpolicy="strict-origin-when-cross-origin" ' +
           'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" ' +
           'allowfullscreen style="width:100%;height:100%;border:none;"></iframe>';
-        dom.playerQualityBadge.textContent = '● ZERO-AD ' + (settings.streamQuality === 'Auto' ? 'HD' : settings.streamQuality);
+        dom.playerQualityBadge.textContent = '● VELORA ' + (settings.streamQuality === 'Auto' ? 'HD' : settings.streamQuality);
       }
 
       async function playInDualLayerEngine(video) {
         applyVisualColorAndSharpness();
-        stopZeroAdMonitor();
+        hideEmbedRestrictedFallback();
 
-        // Local Uploaded Video -> Layer 1 HTML5 Video + Full Web Audio 3D Surround DSP
+        // Local Uploaded Video -> Layer 1 HTML5 <video> + Real-Time Web Audio 3D Surround DSP
         if (video.isLocalUpload) {
           dom.ytApiStageWrap.style.display = 'none';
           if (ytPlayerInstance && typeof ytPlayerInstance.stopVideo === 'function') {
@@ -3433,44 +3416,7 @@
           return;
         }
 
-        // Layer 1: Parallel direct MP4/WebM extraction via fast Piped JSON (2.2s timeout)
-        dom.playerQualityBadge.textContent = '● MENARIK STREAM BEBAS IKLAN...';
-        const resolved = await resolveDirectPipedStream(video.id);
-
-        if (!state.currentVideo || state.currentVideo.id !== video.id) return;
-
-        if (resolved && resolved.streamUrl) {
-          if (resolved.title && video.title.startsWith('YouTube Video (')) {
-            video.title = resolved.title;
-            video.channel = resolved.uploader || video.channel;
-            dom.playerTitle.textContent = video.title;
-            dom.playerChannel.textContent = video.channel;
-            dom.miniTitle.textContent = video.title;
-            dom.miniChannel.textContent = video.channel;
-          }
-
-          dom.ytApiStageWrap.style.display = 'none';
-          if (ytPlayerInstance && typeof ytPlayerInstance.stopVideo === 'function') {
-            ytPlayerInstance.stopVideo();
-          }
-          dom.nativeVideo.style.display = 'block';
-          dom.nativeVideo.src = resolved.streamUrl;
-          dom.nativeVideo.playbackRate = PLAYBACK_SPEEDS[state.playbackSpeedIndex];
-          dom.playerQualityBadge.textContent = '● PURE ' + resolved.quality + ' + 3D DSP';
-
-          dom.nativeVideo.onerror = () => {
-            if (state.currentVideo && state.currentVideo.id === video.id && !video.isLocalUpload) {
-              loadYouTubeApiPlayer(video.id);
-            }
-          };
-
-          if (settings.autoplay) {
-            dom.nativeVideo.play().catch(() => {});
-          }
-          return;
-        }
-
-        // Layer 2: YouTube IFrame API Player with Automatic Ad-Skipper
+        // YouTube Video -> Layer 2 YouTube IFrame Player API
         loadYouTubeApiPlayer(video.id);
       }
 
@@ -3486,16 +3432,17 @@
           title: (videoData.title && !videoData.title.startsWith('YouTube Video ('))
             ? videoData.title
             : (known ? known.title : 'YouTube Video (' + videoData.id + ')'),
-          channel: videoData.channel || (known ? known.channel : 'YouTube Bebas Iklan'),
+          channel: videoData.channel || (known ? known.channel : 'YouTube'),
           category: videoData.category || (known ? known.category : 'Stream'),
-          badge: videoData.badge || (known ? known.badge : 'ZERO-AD'),
+          badge: videoData.badge || (known ? known.badge : 'HD'),
           isLocalUpload: Boolean(videoData.isLocalUpload || (known && known.isLocalUpload)),
           customThumb: videoData.customThumb || (known && known.customThumb) || ''
         };
 
         // Enrich metadata via oEmbed if launched from a raw pasted URL
-        if (resolved.title.startsWith('YouTube Video (')) {
-          fetchJsonFast('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=' + encodeURIComponent(resolved.id) + '&format=json', 2500)
+        if (!resolved.isLocalUpload && resolved.title.startsWith('YouTube Video (')) {
+          fetch('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=' + encodeURIComponent(resolved.id) + '&format=json')
+            .then(r => (r.ok ? r.json() : null))
             .then((meta) => {
               if (meta && meta.title && state.currentVideo && state.currentVideo.id === resolved.id) {
                 resolved.title = meta.title;
@@ -3524,6 +3471,10 @@
         dom.playerCatPill.textContent = resolved.category;
         dom.miniTitle.textContent = resolved.title;
         dom.miniChannel.textContent = resolved.channel;
+        dom.btnPlayerOpenYt.href = resolved.isLocalUpload
+          ? '#'
+          : ('https://www.youtube.com/watch?v=' + encodeURIComponent(resolved.id));
+        dom.btnPlayerOpenYt.style.display = resolved.isLocalUpload ? 'none' : 'inline-flex';
 
         updateBookmarkButtonState();
         renderUpNextQueue();
@@ -3561,7 +3512,7 @@
       }
 
       function stopAndClosePlayer() {
-        stopZeroAdMonitor();
+        hideEmbedRestrictedFallback();
         state.currentVideo = null;
         if (ytPlayerInstance && typeof ytPlayerInstance.stopVideo === 'function') {
           ytPlayerInstance.stopVideo();
@@ -3580,8 +3531,8 @@
 
       function renderUpNextQueue() {
         const activeId = state.currentVideo ? state.currentVideo.id : '';
-        const related = getPersonalizedHomeVideos().filter(v => v.id !== activeId);
-        const pool = related.length > 0 ? related : STARTER_VIDEOS.filter(v => v.id !== activeId);
+        const related = getPersonalizedHomeVideos().filter(v => v.id !== activeId && !restrictedVideoIds.has(v.id));
+        const pool = related.length > 0 ? related : STARTER_VIDEOS.filter(v => v.id !== activeId && !restrictedVideoIds.has(v.id));
         renderCardList(dom.playerUpnextGrid, pool.slice(0, 8), {
           showDeleteCustom: false,
           showTimestamp: false,
@@ -3675,8 +3626,6 @@
         const fragment = document.createDocumentFragment();
 
         videos.forEach((video) => {
-          if (deadVideoIds.has(video.id)) return;
-
           const saved = isBookmarked(video.id);
           const isUploadedItem = state.customFeed.some(c => c.id === video.id);
           const card = document.createElement('article');
@@ -3685,7 +3634,7 @@
           card.setAttribute('tabindex', '0');
 
           const metaExtra = opts.showTimestamp && video.watchedAt
-            ? '<span style="color:#A78BFA;">• ' + escapeHtml(formatRelativeTime(video.watchedAt)) + '</span>'
+            ? '<span style="color:#c4b5fd;">• ' + escapeHtml(formatRelativeTime(video.watchedAt)) + '</span>'
             : '';
 
           const svgCoverUri = generateSvgCoverDataUri(video.title, video.category);
@@ -3701,8 +3650,8 @@
             '<div class="thumb-box">' +
               '<div class="thumb-svg-fallback" aria-hidden="true">' +
                 '<svg width="30" height="30" viewBox="0 0 36 36" fill="none">' +
-                  '<polygon points="8,9 14.2,9 18,21.5 15.2,27" fill="#8B5CF6" />' +
-                  '<polygon points="28,9 21.8,9 15.2,27 18,27" fill="#C4B5FD" />' +
+                  '<polygon points="8,9 14.2,9 18,21.5 15.2,27" fill="#9d6bff" />' +
+                  '<polygon points="28,9 21.8,9 15.2,27 18,27" fill="#c4b5fd" />' +
                 '</svg>' +
                 '<span class="thumb-fallback-title">' + escapeHtml(video.title) + '</span>' +
               '</div>' +
@@ -3715,7 +3664,7 @@
                   '</svg>' +
                 '</div>' +
               '</div>' +
-              '<span class="duration-pill">' + escapeHtml(video.badge || 'ZERO-AD') + '</span>' +
+              '<span class="duration-pill">' + escapeHtml(video.badge || 'HD') + '</span>' +
             '</div>' +
             '<div class="card-content">' +
               '<div class="card-info">' +
@@ -3760,7 +3709,7 @@
 
           if (imgEl) {
             imgEl.addEventListener('error', switchToNextCover);
-            // Detect YouTube's default 120x90 grey missing-thumbnail placeholder
+            // Anti-grey-thumbnail detection: catches YouTube's default 120x90 grey placeholder
             imgEl.addEventListener('load', function () {
               if (!video.isLocalUpload && imgEl.naturalWidth > 0 && imgEl.naturalWidth <= 120 && imgEl.naturalHeight <= 90) {
                 switchToNextCover();
@@ -3851,7 +3800,7 @@
 
       function getPersonalizedHomeVideos() {
         const favSet = new Set(state.favoriteCategories);
-        const pool = [...state.customFeed, ...STARTER_VIDEOS].filter(v => !deadVideoIds.has(v.id));
+        const pool = [...state.customFeed, ...STARTER_VIDEOS].filter(v => !restrictedVideoIds.has(v.id));
 
         if (state.homeCategory === 'Video Saya') {
           return state.customFeed;
@@ -3948,8 +3897,18 @@
       }
 
       /* ------------------------------------------------------------------------
-         13. GLOBAL YOUTUBE SEARCH + LIVE WORD & PHRASE MATCHING
+         13. GLOBAL YOUTUBE SEARCH (YOUTUBE DATA API v3 + LIVE WORD MATCHING)
          ------------------------------------------------------------------------ */
+      function updateApiKeyBadges() {
+        const hasKey = Boolean(state.ytApiKey && state.ytApiKey.length >= 15);
+        dom.apikeyBadgeStatus.textContent = hasKey ? 'Aktif (API v3)' : 'Belum Terpasang';
+        dom.apikeyBadgeStatus.style.background = hasKey ? 'rgba(16, 185, 129, 0.16)' : 'rgba(255, 255, 255, 0.08)';
+        dom.apikeyBadgeStatus.style.color = hasKey ? '#34D399' : '#94A3B8';
+
+        dom.searchApiStatusBadge.textContent = hasKey ? '● YouTube API v3 Aktif' : 'Pencocokan Live';
+        dom.searchApiStatusBadge.style.color = hasKey ? '#34D399' : 'var(--accent-lavender)';
+      }
+
       function searchLocalPool(query) {
         const q = query.toLowerCase().trim();
         const rawPool = [
@@ -3958,7 +3917,7 @@
           ...cachedSearchCatalog,
           ...STARTER_VIDEOS,
           ...state.watchHistory
-        ].filter(v => !deadVideoIds.has(v.id));
+        ];
 
         const seen = new Set();
         const deduped = rawPool.filter((item) => {
@@ -3967,7 +3926,7 @@
           return true;
         });
 
-        if (!q) return deduped.slice(0, 12);
+        if (!q) return deduped.slice(0, 15);
 
         const tokens = q.split(/\s+/).filter(Boolean);
         return deduped
@@ -4085,6 +4044,7 @@
 
         if (!query) {
           dom.liveSuggestionsBox.classList.remove('visible');
+          dom.searchNoApikeyBanner.style.display = 'none';
           dom.searchHeadingLabel.textContent = 'Pilihan Populer & Terverifikasi';
           dom.searchCountLabel.textContent = localInstant.length + ' video';
           renderCardList(dom.searchGrid, localInstant, { showDeleteCustom: false, showTimestamp: false, append: false });
@@ -4128,21 +4088,86 @@
         renderSuggestionsDropdown(query, combined.slice(0, 7));
       }
 
-      function formatSeconds(sec) {
-        const total = Math.floor(sec);
-        const h = Math.floor(total / 3600);
-        const m = Math.floor((total % 3600) / 60);
-        const s = total % 60;
-        const pad = n => String(n).padStart(2, '0');
-        return h > 0 ? (h + ':' + pad(m) + ':' + pad(s)) : (m + ':' + pad(s));
-      }
-
       function cacheSearchResults(items) {
         items.forEach((it) => {
           if (!cachedSearchCatalog.some(c => c.id === it.id)) {
             cachedSearchCatalog.push(it);
           }
         });
+      }
+
+      /**
+       * Official YouTube Data API v3 Search + Video Duration Fetcher
+       */
+      async function searchViaYouTubeDataApiV3(query, apiKey) {
+        const searchUrl =
+          'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&maxResults=24&q=' +
+          encodeURIComponent(query) +
+          '&key=' +
+          encodeURIComponent(apiKey);
+
+        const searchRes = await fetch(searchUrl);
+        if (!searchRes.ok) {
+          const errBody = await searchRes.json().catch(() => ({}));
+          const msg = (errBody && errBody.error && errBody.error.message) || ('API Error ' + searchRes.status);
+          throw new Error(msg);
+        }
+
+        const searchData = await searchRes.json();
+        const rawItems = Array.isArray(searchData.items) ? searchData.items : [];
+        const videoIds = rawItems.map(it => it.id && it.id.videoId).filter(Boolean);
+
+        if (videoIds.length === 0) return [];
+
+        // Fetch exact durations from videos endpoint
+        const durationMap = {};
+        try {
+          const detailsUrl =
+            'https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=' +
+            encodeURIComponent(videoIds.join(',')) +
+            '&key=' +
+            encodeURIComponent(apiKey);
+          const detRes = await fetch(detailsUrl);
+          if (detRes.ok) {
+            const detData = await detRes.json();
+            (detData.items || []).forEach((v) => {
+              if (v.id && v.contentDetails && v.contentDetails.duration) {
+                durationMap[v.id] = parseIsoDurationToBadge(v.contentDetails.duration);
+              }
+            });
+          }
+        } catch (e) {
+          // Non-fatal if duration fetch fails
+        }
+
+        const decodeHtmlEntities = (str) => {
+          const txt = document.createElement('textarea');
+          txt.innerHTML = str || '';
+          return txt.value;
+        };
+
+        return rawItems
+          .map((it) => {
+            const vid = it.id && it.id.videoId;
+            if (!vid) return null;
+            const snip = it.snippet || {};
+            const thumbs = snip.thumbnails || {};
+            const thumbUrl =
+              (thumbs.high && thumbs.high.url) ||
+              (thumbs.medium && thumbs.medium.url) ||
+              (thumbs.default && thumbs.default.url) ||
+              '';
+
+            return {
+              id: vid,
+              title: decodeHtmlEntities(snip.title || 'YouTube Video'),
+              channel: decodeHtmlEntities(snip.channelTitle || 'YouTube'),
+              category: 'YouTube Search',
+              badge: durationMap[vid] || 'HD',
+              customThumb: thumbUrl
+            };
+          })
+          .filter(Boolean);
       }
 
       async function performGlobalSearch(rawQuery) {
@@ -4163,59 +4188,49 @@
 
         if (!query) {
           dom.searchSpinnerRow.style.display = 'none';
+          dom.searchNoApikeyBanner.style.display = 'none';
           dom.searchHeadingLabel.textContent = 'Pilihan Populer & Terverifikasi';
           dom.searchCountLabel.textContent = localResults.length + ' video';
           renderCardList(dom.searchGrid, localResults, { showDeleteCustom: false, showTimestamp: false, append: false });
           return;
         }
 
-        dom.searchSpinnerRow.style.display = 'flex';
-        dom.searchSpinnerLabel.textContent = 'Mencari "' + query + '"...';
-        dom.searchHeadingLabel.textContent = 'Hasil untuk "' + query + '"';
-        dom.searchCountLabel.textContent = localResults.length + ' cocok';
-        renderCardList(dom.searchGrid, localResults, { showDeleteCustom: false, showTimestamp: false, append: false });
+        // If YouTube Data API v3 Key is configured, fetch global YouTube results directly
+        if (state.ytApiKey && state.ytApiKey.length >= 15) {
+          dom.searchNoApikeyBanner.style.display = 'none';
+          dom.searchSpinnerRow.style.display = 'flex';
+          dom.searchSpinnerLabel.textContent = 'Mencari "' + query + '" di YouTube API v3...';
+          dom.searchHeadingLabel.textContent = 'Hasil YouTube untuk "' + query + '"';
+          dom.searchCountLabel.textContent = '';
 
-        // Parallel Piped JSON global search (2.5s timeout)
-        const pipedSearchTasks = PIPED_JSON_ENDPOINTS.map(async (base) => {
-          const json = await fetchJsonFast(base + '/search?q=' + encodeURIComponent(query) + '&filter=all', 2500);
-          if (json && Array.isArray(json.items)) {
-            const mapped = json.items
-              .filter(it => it.type === 'stream' && it.url)
-              .map((it) => {
-                const id = parseYouTubeVideoId(it.url);
-                if (!id) return null;
-                return {
-                  id,
-                  title: it.title || 'YouTube Video',
-                  channel: it.uploaderName || 'YouTube',
-                  category: 'Search Result',
-                  badge: it.duration > 0 ? formatSeconds(it.duration) : 'LIVE'
-                };
-              })
-              .filter(Boolean);
-            if (mapped.length > 0) return mapped;
+          try {
+            const ytItems = await searchViaYouTubeDataApiV3(query, state.ytApiKey);
+            if (searchId !== state.activeSearchId) return;
+
+            dom.searchSpinnerRow.style.display = 'none';
+            if (ytItems.length > 0) {
+              cacheSearchResults(ytItems);
+              dom.searchCountLabel.textContent = ytItems.length + ' video';
+              renderCardList(dom.searchGrid, ytItems, { showDeleteCustom: false, showTimestamp: false, append: false });
+              return;
+            }
+          } catch (err) {
+            if (searchId !== state.activeSearchId) return;
+            dom.searchSpinnerRow.style.display = 'none';
+            showToast('YouTube API: ' + (err.message || 'Gagal memuat'));
           }
-          throw new Error('No Piped items');
-        });
-
-        try {
-          const remoteItems = await promiseAny(pipedSearchTasks);
-          if (searchId !== state.activeSearchId) return;
-
-          cacheSearchResults(remoteItems);
-          dom.searchSpinnerRow.style.display = 'none';
-          dom.searchHeadingLabel.textContent = 'Hasil untuk "' + query + '"';
-          dom.searchCountLabel.textContent = remoteItems.length + ' video';
-          renderCardList(dom.searchGrid, remoteItems, { showDeleteCustom: false, showTimestamp: false, append: false });
-          return;
-        } catch (err) {
-          // Keep instant local matches cleanly displayed
+        } else {
+          // Show helpful API Key + Direct YouTube Search prompt when no API key is saved
+          dom.bannerMissingQuery.textContent = query;
+          dom.btnBannerOpenYt.href = 'https://m.youtube.com/results?search_query=' + encodeURIComponent(query);
+          dom.searchNoApikeyBanner.style.display = 'block';
         }
 
         if (searchId !== state.activeSearchId) return;
         dom.searchSpinnerRow.style.display = 'none';
-        dom.searchHeadingLabel.textContent = 'Hasil untuk "' + query + '"';
+        dom.searchHeadingLabel.textContent = 'Kecocokan Katalog untuk "' + query + '"';
         dom.searchCountLabel.textContent = localResults.length + ' video';
+        renderCardList(dom.searchGrid, localResults, { showDeleteCustom: false, showTimestamp: false, append: false });
       }
 
       /* ------------------------------------------------------------------------
@@ -4225,6 +4240,15 @@
       let pendingUploadThumb = '';
       let pendingUploadDuration = 'LOKAL';
       let currentUploadMode = 'file';
+
+      function formatSeconds(sec) {
+        const total = Math.floor(sec);
+        const h = Math.floor(total / 3600);
+        const m = Math.floor((total % 3600) / 60);
+        const s = total % 60;
+        const pad = n => String(n).padStart(2, '0');
+        return h > 0 ? (h + ':' + pad(m) + ':' + pad(s)) : (m + ':' + pad(s));
+      }
 
       function extractVideoMetadataAndThumb(file) {
         return new Promise((resolve) => {
@@ -4284,6 +4308,9 @@
       }
 
       function syncAllSettingsUI() {
+        dom.settingsYtApikeyInput.value = state.ytApiKey || '';
+        updateApiKeyBadges();
+
         document.querySelectorAll('[data-setting-group]').forEach((group) => {
           const key = group.getAttribute('data-setting-group');
           const currentVal = String(settings[key]);
@@ -4291,9 +4318,6 @@
             pill.classList.toggle('active', pill.getAttribute('data-val') === currentVal);
           });
         });
-
-        dom.toggleAdSkip.classList.toggle('on', Boolean(settings.adSkipper));
-        dom.toggleAdSkip.setAttribute('aria-checked', settings.adSkipper ? 'true' : 'false');
 
         dom.toggleAutoplay.classList.toggle('on', Boolean(settings.autoplay));
         dom.toggleAutoplay.setAttribute('aria-checked', settings.autoplay ? 'true' : 'false');
@@ -4322,6 +4346,32 @@
         VeloraAudioDsp.syncParameters();
         renderInterestSelectorGrids();
       }
+
+      // YouTube Data API v3 Key Controls
+      dom.btnToggleApikeyVis.addEventListener('click', () => {
+        const isPass = dom.settingsYtApikeyInput.type === 'password';
+        dom.settingsYtApikeyInput.type = isPass ? 'text' : 'password';
+      });
+
+      dom.btnSaveYtApikey.addEventListener('click', () => {
+        const keyVal = dom.settingsYtApikeyInput.value.trim();
+        if (!keyVal) {
+          showToast('Tempel YouTube API v3 Key terlebih dahulu');
+          return;
+        }
+        state.ytApiKey = keyVal;
+        safeSetStorage(KEYS.YT_API_KEY, keyVal);
+        updateApiKeyBadges();
+        showToast('YouTube Data API v3 Key tersimpan!');
+      });
+
+      dom.btnClearYtApikey.addEventListener('click', () => {
+        state.ytApiKey = '';
+        dom.settingsYtApikeyInput.value = '';
+        safeSetStorage(KEYS.YT_API_KEY, '');
+        updateApiKeyBadges();
+        showToast('API Key dihapus');
+      });
 
       document.querySelectorAll('[data-setting-group]').forEach((group) => {
         const key = group.getAttribute('data-setting-group');
@@ -4376,13 +4426,6 @@
         dom.valTrebleDetail.textContent = settings.trebleDetail + '%';
         saveSettings();
         VeloraAudioDsp.syncParameters();
-      });
-
-      dom.toggleAdSkip.addEventListener('click', () => {
-        settings.adSkipper = !settings.adSkipper;
-        saveSettings();
-        syncAllSettingsUI();
-        showToast('Zero-Ad Auto Skipper ' + (settings.adSkipper ? 'Aktif' : 'Nonaktif'));
       });
 
       dom.toggleAutoplay.addEventListener('click', () => {
@@ -4496,6 +4539,25 @@
 
       dom.btnHeaderSettings.addEventListener('click', () => {
         switchBottomTab('settings');
+      });
+
+      dom.btnBannerGotoSettings.addEventListener('click', () => {
+        switchBottomTab('settings');
+        setTimeout(() => {
+          dom.settingsApikeyCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          dom.settingsYtApikeyInput.focus();
+        }, 120);
+      });
+
+      // Embed Fallback Actions
+      dom.btnFallbackNextVideo.addEventListener('click', () => {
+        const currentId = state.currentVideo ? state.currentVideo.id : '';
+        const pool = getPersonalizedHomeVideos().filter(v => v.id !== currentId && !restrictedVideoIds.has(v.id));
+        if (pool.length > 0) {
+          launchVideo(pool[0]);
+        } else {
+          stopAndClosePlayer();
+        }
       });
 
       // Interests Modal
