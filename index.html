@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Mini Studio 3D - Mobile Builder</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --glass: rgba(18, 18, 24, 0.78);
+      --border: rgba(180, 140, 255, 0.25);
+      --accent: #b388ff;
+      --text: #f0f0f5;
+      --muted: #8a8a9e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; user-select: none; }
+    body { background: var(--bg); color: var(--text); overflow: hidden; height: 100vh; width: 100vw; }
+    #canvas-container { position: fixed; inset: 0; z-index: 1; }
+    
+    /* Top Toolbar */
+    .topbar {
+      position: fixed; top: 12px; left: 12px; right: 12px; z-index: 10;
+      display: flex; gap: 8px; overflow-x: auto; padding: 8px 12px;
+      background: var(--glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border); border-radius: 16px;
+    }
+    .topbar::-webkit-scrollbar { display: none; }
+    button {
+      background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 12px; border-radius: 10px; font-size: 12px; font-weight: 600; white-space: nowrap;
+      transition: transform 0.15s cubic-bezier(0.2, 1.4, 0.4, 1), background 0.15s;
+    }
+    button:active { transform: scale(0.92); background: var(--accent); color: #000; }
+    button.primary { background: var(--accent); color: #000; border: none; }
+    button.danger { background: rgba(255, 75, 75, 0.2); color: #ff6b6b; border-color: rgba(255, 75, 75, 0.3); }
+
+    /* Bottom Dock */
+    .dock {
+      position: fixed; bottom: 12px; left: 12px; right: 12px; z-index: 10;
+      background: var(--glass); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border); border-radius: 18px; padding: 12px;
+      display: flex; flex-direction: column; gap: 10px; max-height: 42vh; overflow-y: auto;
+    }
+    .tabs { display: flex; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; }
+    .tab { flex: 1; text-align: center; padding: 6px; font-size: 12px; color: var(--muted); border-radius: 8px; }
+    .tab.active { background: rgba(179, 136, 255, 0.18); color: var(--accent); font-weight: 700; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .field { display: flex; flex-direction: column; gap: 4px; }
+    .field label { font-size: 10px; color: var(--muted); text-transform: uppercase; }
+    input[type="number"], input[type="text"], textarea {
+      width: 100%; background: #0c0c10; border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text); padding: 6px 8px; border-radius: 8px; font-size: 12px; user-select: text;
+    }
+    input[type="color"] { width: 100%; height: 32px; border: none; border-radius: 8px; background: transparent; }
+    textarea { font-family: monospace; height: 70px; resize: none; }
+    .hidden { display: none !important; }
+    #status { font-size: 11px; color: var(--accent); text-align: center; }
+  </style>
+</head>
+<body>
+
+  <div id="canvas-container"></div>
+
+  <div class="topbar">
+    <button class="primary" onclick="spawnPart('box')">+ Block</button>
+    <button onclick="spawnPart('sphere')">+ Sphere</button>
+    <button onclick="duplicateSelected()">Duplicate</button>
+    <button class="danger" onclick="deleteSelected()">Hapus</button>
+    <button onclick="togglePlay()" id="play-btn">Run Script</button>
+    <button class="primary" onclick="exportRBXLX()">Export .rbxlx</button>
+  </div>
+
+  <div class="dock">
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('props', this)">Properties</div>
+      <div class="tab" onclick="switchTab('script', this)">Script (JS/Lua Style)</div>
+    </div>
+
+    <div id="tab-props">
+      <div id="status">Tap objek di layar buat edit, atau klik + Block</div>
+      <div id="inspector" class="hidden" style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
+        <div class="grid-3">
+          <div class="field"><label>Nama Part</label><input type="text" id="prop-name" onchange="updateProps()" /></div>
+          <div class="field"><label>Warna</label><input type="color" id="prop-color" onchange="updateProps()" /></div>
+          <div class="field"><label>Anchored</label><button id="prop-anchor" onclick="toggleAnchor()">True</button></div>
+        </div>
+        <div class="grid-3">
+          <div class="field"><label>Pos X</label><input type="number" step="0.5" id="pos-x" onchange="updateProps()" /></div>
+          <div class="field"><label>Pos Y</label><input type="number" step="0.5" id="pos-y" onchange="updateProps()" /></div>
+          <div class="field"><label>Pos Z</label><input type="number" step="0.5" id="pos-z" onchange="updateProps()" /></div>
+        </div>
+        <div class="grid-3">
+          <div class="field"><label>Size X</label><input type="number" step="0.5" min="0.5" id="size-x" onchange="updateProps()" /></div>
+          <div class="field"><label>Size Y</label><input type="number" step="0.5" min="0.5" id="size-y" onchange="updateProps()" /></div>
+          <div class="field"><label>Size Z</label><input type="number" step="0.5" min="0.5" id="size-z" onchange="updateProps()" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-script" class="hidden">
+      <div class="field">
+        <label>Loop Script (Jalan tiap frame pas Run Script aktif)</label>
+        <textarea id="code-editor">// Variabel 'part' = objek yang lagi dipilih
+if (part) {
+  part.rotation.y += 0.03;
+}</textarea>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script>
+    let scene, camera, renderer, controls, raycaster, mouse;
+    let parts = [];
+    let selected = null;
+    let isPlaying = false;
+    let partCounter = 1;
+
+    function init() {
+      const container = document.getElementById('canvas-container');
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x050508);
+
+      camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(10, 10, 12);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+
+      // Lighting
+      const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+      scene.add(ambient);
+      const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      dirLight.position.set(15, 25, 10);
+      scene.add(dirLight);
+
+      // Baseplate ala Roblox
+      const baseGeo = new THREE.BoxGeometry(40, 1, 40);
+      const baseMat = new THREE.MeshStandardMaterial({ color: 0x1e1e26, roughness: 0.8 });
+      const baseplate = new THREE.Mesh(baseGeo, baseMat);
+      baseplate.position.y = -0.5;
+      baseplate.name = "Baseplate";
+      scene.add(baseplate);
+
+      const grid = new THREE.GridHelper(40, 40, 0xb388ff, 0x2a2a35);
+      scene.add(grid);
+
+      raycaster = new THREE.Raycaster();
+      mouse = new THREE.Vector2();
+
+      renderer.domElement.addEventListener('pointerdown', onPointerDown);
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      spawnPart('box');
+      animate();
+    }
+
+    function spawnPart(type) {
+      const geo = type === 'sphere' ? new THREE.SphereGeometry(1, 24, 24) : new THREE.BoxGeometry(4, 1, 2);
+      const mat = new THREE.MeshStandardMaterial({ color: 0xa3a2a5, roughness: 0.5 });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(0, 1 + (parts.length * 0.5), 0);
+      mesh.userData = {
+        name: (type === 'sphere' ? 'Sphere' : 'Part') + partCounter++,
+        anchored: true,
+        shape: type,
+        origPos: mesh.position.clone(),
+        origRot: mesh.rotation.clone()
+      };
+      scene.add(mesh);
+      parts.push(mesh);
+      selectPart(mesh);
+    }
+
+    function selectPart(mesh) {
+      if (selected && selected.material) selected.material.emissive.setHex(0x000000);
+      selected = mesh;
+      const insp = document.getElementById('inspector');
+      const status = document.getElementById('status');
+
+      if (!selected) {
+        insp.classList.add('hidden');
+        status.textContent = "Gak ada objek yang dipilih.";
+        return;
+      }
+
+      selected.material.emissive.setHex(0x2a1a4a);
+      insp.classList.remove('hidden');
+      status.textContent = "Selected: " + selected.userData.name;
+
+      document.getElementById('prop-name').value = selected.userData.name;
+      document.getElementById('prop-color').value = '#' + selected.material.color.getHexString();
+      document.getElementById('prop-anchor').textContent = selected.userData.anchored ? 'True' : 'False';
+
+      document.getElementById('pos-x').value = selected.position.x;
+      document.getElementById('pos-y').value = selected.position.y;
+      document.getElementById('pos-z').value = selected.position.z;
+
+      document.getElementById('size-x').value = selected.scale.x;
+      document.getElementById('size-y').value = selected.scale.y;
+      document.getElementById('size-z').value = selected.scale.z;
+    }
+
+    function updateProps() {
+      if (!selected) return;
+      selected.userData.name = document.getElementById('prop-name').value || 'Part';
+      selected.material.color.set(document.getElementById('prop-color').value);
+
+      selected.position.set(
+        parseFloat(document.getElementById('pos-x').value) || 0,
+        parseFloat(document.getElementById('pos-y').value) || 0,
+        parseFloat(document.getElementById('pos-z').value) || 0
+      );
+      selected.scale.set(
+        parseFloat(document.getElementById('size-x').value) || 1,
+        parseFloat(document.getElementById('size-y').value) || 1,
+        parseFloat(document.getElementById('size-z').value) || 1
+      );
+      selected.userData.origPos = selected.position.clone();
+      document.getElementById('status').textContent = "Selected: " + selected.userData.name;
+    }
+
+    function toggleAnchor() {
+      if (!selected) return;
+      selected.userData.anchored = !selected.userData.anchored;
+      document.getElementById('prop-anchor').textContent = selected.userData.anchored ? 'True' : 'False';
+    }
+
+    function duplicateSelected() {
+      if (!selected) return;
+      const clone = selected.clone();
+      clone.material = selected.material.clone();
+      clone.position.y += 1.5;
+      clone.userData = {
+        ...selected.userData,
+        name: selected.userData.name + '_Copy',
+        origPos: clone.position.clone(),
+        origRot: clone.rotation.clone()
+      };
+      scene.add(clone);
+      parts.push(clone);
+      selectPart(clone);
+    }
+
+    function deleteSelected() {
+      if (!selected) return;
+      scene.remove(selected);
+      parts = parts.filter(p => p !== selected);
+      selectPart(null);
+    }
+
+    function onPointerDown(e) {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+      const hits = raycaster.intersectObjects(parts);
+      if (hits.length > 0) selectPart(hits[0].object);
+    }
+
+    function togglePlay() {
+      isPlaying = !isPlaying;
+      const btn = document.getElementById('play-btn');
+      btn.textContent = isPlaying ? 'Stop' : 'Run Script';
+      btn.classList.toggle('danger', isPlaying);
+      if (!isPlaying) {
+        parts.forEach(p => {
+          p.position.copy(p.userData.origPos);
+          p.rotation.copy(p.userData.origRot);
+        });
+      }
+    }
+
+    function switchTab(tab, el) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('tab-props').classList.toggle('hidden', tab !== 'props');
+      document.getElementById('tab-script').classList.toggle('hidden', tab !== 'script');
+    }
+
+    function exportRBXLX() {
+      let itemsXml = '';
+      parts.forEach((p, idx) => {
+        const hex = p.material.color.getHex();
+        const r = (hex >> 16) & 255, g = (hex >> 8) & 255, b = hex & 255;
+        const colorUint8 = ((255 << 24) | (r << 16) | (g << 8) | b) >>> 0;
+        const sx = (p.userData.shape === 'sphere' ? 2 : 4) * p.scale.x;
+        const sy = (p.userData.shape === 'sphere' ? 2 : 1) * p.scale.y;
+        const sz = (p.userData.shape === 'sphere' ? 2 : 2) * p.scale.z;
+
+        itemsXml += `
+    <Item class="Part" referent="RBX${idx + 1}">
+      <Properties>
+        <string name="Name">${p.userData.name}</string>
+        <bool name="Anchored">${p.userData.anchored}</bool>
+        <CoordinateFrame name="CFrame">
+          <X>${p.position.x}</X><Y>${p.position.y}</Y><Z>${p.position.z}</Z>
+          <R00>1</R00><R01>0</R01><R02>0</R02>
+          <R10>0</R10><R11>1</R11><R12>0</R12>
+          <R20>0</R20><R21>0</R21><R22>1</R22>
+        </CoordinateFrame>
+        <Vector3 name="size"><X>${sx}</X><Y>${sy}</Y><Z>${sz}</Z></Vector3>
+        <Color3uint8 name="Color3uint8">${colorUint8}</Color3uint8>
+        <token name="shape">${p.userData.shape === 'sphere' ? 0 : 1}</token>
+      </Properties>
+    </Item>`;
+      });
+
+      const fullXml = `<?xml version="1.0" encoding="utf-8"?>
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+  <Item class="Workspace" referent="RBX0">
+    <Properties><string name="Name">Workspace</string></Properties>${itemsXml}
+  </Item>
+</roblox>`;
+
+      const blob = new Blob([fullXml], { type: 'application/xml' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'MobileBuild.rbxlx';
+      a.click();
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      if (isPlaying) {
+        try {
+          const fn = new Function('part', 'parts', document.getElementById('code-editor').value);
+          fn(selected, parts);
+        } catch (err) {}
+      }
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    init();
+  </script>
+</body>
+</html>
